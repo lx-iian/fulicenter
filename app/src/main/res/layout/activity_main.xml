@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/list_background"
@@ -25,13 +26,14 @@
         android:orientation="horizontal">
 
         <RadioGroup
-            android:id="@+id/rg_bottom_layout"
+            android:id="@+id/rb_bottom_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
 
             <RadioButton
+                android:id="@+id/rb_new_good"
                 style="@style/menu_item_style"
                 android:button="@null"
                 android:checked="true"
@@ -40,6 +42,7 @@
                 android:textColor="@color/main_botton_text_color" />
 
             <RadioButton
+                android:id="@+id/rb_category"
                 style="@style/menu_item_style"
                 android:button="@null"
                 android:checked="false"
@@ -48,6 +51,7 @@
                 android:textColor="@color/main_botton_text_color" />
 
             <RadioButton
+                android:id="@+id/rb_boutique"
                 style="@style/menu_item_style"
                 android:button="@null"
                 android:checked="false"
@@ -58,6 +62,7 @@
             <RelativeLayout style="@style/style_menu_item">
 
                 <RadioButton
+                    android:id="@+id/rb_cart"
                     style="@style/menu_item_style_cart"
                     android:button="@null"
                     android:checked="false"
@@ -91,6 +96,7 @@
             </RelativeLayout>
 
             <RadioButton
+                android:id="@+id/rb_personal_center"
                 style="@style/menu_item_style"
                 android:button="@null"
                 android:checked="false"
