@@ -3,7 +3,7 @@ package zhou.com.fulicenter.utils;
 import android.app.Activity;
 import android.content.Intent;
 
-import zhou.com.fulicenter.MainActivity;
+import zhou.com.fulicenter.activity.MainActivity;
 import zhou.com.fulicenter.R;
 
 

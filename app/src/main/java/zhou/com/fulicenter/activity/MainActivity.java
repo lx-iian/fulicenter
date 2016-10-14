@@ -1,7 +1,9 @@
-package zhou.com.fulicenter;
+package zhou.com.fulicenter.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import zhou.com.fulicenter.R;
 
 public class MainActivity extends AppCompatActivity {
 
