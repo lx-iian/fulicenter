@@ -18,6 +18,8 @@ import okhttp3.Callback;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import zhou.com.fulicenter.I;
+import zhou.com.fulicenter.R;
 
 /**
  * Created by yao on 2016/5/18.

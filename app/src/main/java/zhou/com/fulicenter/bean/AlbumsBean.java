@@ -5,12 +5,6 @@ package zhou.com.fulicenter.bean;
  */
 public class AlbumsBean {
 
-    /**
-     * pid : 7677
-     * imgId : 28299
-     * imgUrl : 201509/goods_img/7677_P_1442391216316.png
-     * thumbUrl : no_picture.gif
-     */
 
     private int pid;
     private int imgId;
