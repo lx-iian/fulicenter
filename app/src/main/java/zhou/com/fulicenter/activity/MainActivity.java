@@ -1,77 +1,102 @@
 package zhou.com.fulicenter.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
 
 public class MainActivity extends AppCompatActivity {
-    private RadioGroup mRb_bottom_layout;
-    private RadioButton mRb_new_good, mRb_category, mRb_boutique, mRb_cart, mRb_personal_center;
+    @Bind(R.id.rb_new_good)
+    RadioButton rbNewGood;
+    @Bind(R.id.rb_category)
+    RadioButton rbCategory;
+    @Bind(R.id.rb_boutique)
+    RadioButton rbBoutique;
+    @Bind(R.id.rb_cart)
+    RadioButton rbCart;
+    @Bind(R.id.rb_personal_center)
+    RadioButton rbPersonalCenter;
+    @Bind(R.id.rb_bottom_layout)
+    RadioGroup rbBottomLayout;
+
+    private boolean isCart;
+    private RadioButton[] rbs;
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
+        ButterKnife.bind(this);
         // setListener();
+        initView();
     }
 
     private void initView() {
-        mRb_bottom_layout = (RadioGroup) findViewById(R.id.rb_bottom_layout);
-
-        mRb_new_good = (RadioButton) findViewById(R.id.rb_new_good);
-        mRb_category = (RadioButton) findViewById(R.id.rb_category);
-        mRb_boutique = (RadioButton) findViewById(R.id.rb_boutique);
-        mRb_cart = (RadioButton) findViewById(R.id.rb_cart);
-        mRb_personal_center = (RadioButton) findViewById(R.id.rb_personal_center);
+        rbs = new RadioButton[5];
+        rbs[0] = rbNewGood;
+        rbs[1] = rbCategory;
+        rbs[2] = rbBoutique;
+        rbs[3] = rbCart;
+        rbs[4] = rbPersonalCenter;
     }
 
-/*    private void setListener() {
-        mRb_bottom_layout.setOnCheckedChangeListener(new onCheckedChange());
-    }*/
+    private void setRadioButtomSatatus() {
+        for (int i = 0; i < rbs.length; i++) {
+            if (i == index) {
+                rbs[i].setChecked(true);
+            } else {
+                rbs[i].setChecked(false);
+            }
+        }
+    }
 
-   public void onCheckedChange(View view) {
+    public void onCheckedChange(View view) {
         switch (view.getId()) {
             case R.id.rb_new_good:
-                mutual((RadioButton) view);
+                //  setCart();
+                index = 0;
                 break;
             case R.id.rb_category:
-                mutual((RadioButton) view);
+                // setCart();
+                index = 1;
                 break;
             case R.id.rb_boutique:
-                mutual((RadioButton) view);
+                //  setCart();
+                index = 2;
                 break;
             case R.id.rb_cart:
-                mutual((RadioButton) view);
+                //  setOtherRb();
+                index = 3;
                 break;
             case R.id.rb_personal_center:
-                mutual((RadioButton) view);
+                //  setCart();
+                index = 4;
                 break;
+        }
+        setRadioButtomSatatus();
+    }
 
-
+  /*  private void setOtherRb() {
+        if (!isCart) {
+            isCart = true;
+            rbNewGood.setChecked(false);
+            rbBoutique.setChecked(false);
+            rbCategory.setChecked(false);
+            rbPersonalCenter.setChecked(false);
         }
     }
 
-    private void mutual(RadioButton radioButton) {
-        if (radioButton != mRb_new_good) {
-            mRb_new_good.setChecked(false);
+    private void setCart() {
+        if (isCart) {
+            rbCart.setChecked(false);
+            isCart = false;
         }
-        if (radioButton != mRb_boutique) {
-            mRb_boutique.setChecked(false);
-        }
-        if (radioButton != mRb_cart) {
-            mRb_cart.setChecked(false);
-        }
-        if (radioButton != mRb_category) {
-            mRb_category.setChecked(false);
-        }
-        if (radioButton != mRb_personal_center) {
-            mRb_personal_center.setChecked(false);
-        }
-    }
+    }*/
+
 }

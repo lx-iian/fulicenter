@@ -38,7 +38,7 @@
                 android:button="@null"
                 android:checked="true"
                 android:drawableTop="@drawable/selector_menu_item_new_good"
-                android:text="新品"
+                android:text="@string/new_good_text"
                 android:textColor="@color/main_botton_text_color" />
 
             <RadioButton
@@ -47,7 +47,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:drawableTop="@drawable/selector_menu_item_category"
-                android:text="分类"
+                android:text="@string/category_text"
                 android:textColor="@color/main_botton_text_color" />
 
             <RadioButton
@@ -56,7 +56,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:drawableTop="@drawable/selector_menu_item_boutique"
-                android:text="发现"
+                android:text="@string/boutique_text"
                 android:textColor="@color/main_botton_text_color" />
 
             <RelativeLayout style="@style/style_menu_item">
@@ -67,7 +67,7 @@
                     android:button="@null"
                     android:checked="false"
                     android:drawableTop="@drawable/selector_menu_item_cart"
-                    android:text="购物车"
+                    android:text="@string/cart_text"
                     android:textColor="@color/main_botton_text_color" />
 
                 <LinearLayout
@@ -101,7 +101,7 @@
                 android:button="@null"
                 android:checked="false"
                 android:drawableTop="@drawable/selector_menu_item_personal_center"
-                android:text="我的"
+                android:text="@string/personal_center_text"
                 android:textColor="@color/main_botton_text_color" />
 
         </RadioGroup>
