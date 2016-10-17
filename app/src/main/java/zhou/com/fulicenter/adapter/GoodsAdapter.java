@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.Bind;
@@ -15,6 +16,7 @@ import butterknife.ButterKnife;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.NewGoodsBean;
+import zhou.com.fulicenter.utils.ImageLoader;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -23,9 +25,10 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     Context mContext;
     List<NewGoodsBean> mList;
 
-    public GoodsAdapter(Context mContext, List<NewGoodsBean> mList) {
+    public GoodsAdapter(Context mContext, List<NewGoodsBean> list) {
         this.mContext = mContext;
-        this.mList = mList;
+        mList = new ArrayList<>();
+        mList.addAll(list);
     }
 
     @Override
@@ -46,7 +49,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         } else {
             GoodsViewHolder gvh = (GoodsViewHolder) holder;
             NewGoodsBean goods = mList.get(position);
-            // set image
+            ImageLoader.downloadImg(mContext,gvh.ivGoodsThumb,goods.getGoodsThumb());
             gvh.tvGoodsName.setText(goods.getGoodsName());
             gvh.tvgGoodsPrice.setText(goods.getCurrencyPrice());
         }
@@ -65,6 +68,14 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         return I.TYPE_ITEM;
     }
 
+    public void initData(ArrayList<NewGoodsBean> list) {
+        if (mList != null) {
+            mList.clear();
+        }
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
     static class GoodsViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ivGoodsThumb)
         ImageView ivGoodsThumb;
@@ -81,7 +92,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    static class FooterViewHolder extends RecyclerView.ViewHolder{
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.tvFooter)
         TextView tvFooter;
 

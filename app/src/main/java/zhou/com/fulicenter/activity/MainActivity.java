@@ -1,6 +1,7 @@
 package zhou.com.fulicenter.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.RadioButton;
@@ -9,6 +10,7 @@ import android.widget.RadioGroup;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
+import zhou.com.fulicenter.fragment.NewGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
     @Bind(R.id.rb_new_good)
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     private boolean isCart;
     private RadioButton[] rbs;
     private int index;
+    Fragment[] mFragments;
+    NewGoodsFragment mNewGoodsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         // setListener();
         initView();
+        initFragment();
+    }
+
+    private void initFragment() {
+        mFragments = new Fragment[5];
+        mNewGoodsFragment = new NewGoodsFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.fragment_container, mNewGoodsFragment)
+                .show(mNewGoodsFragment)
+                .commit();
     }
 
     private void initView() {
