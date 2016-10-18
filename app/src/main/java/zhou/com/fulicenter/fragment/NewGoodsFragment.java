@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
@@ -25,23 +25,24 @@ import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.ConvertUtils;
 import zhou.com.fulicenter.utils.L;
+import zhou.com.fulicenter.views.SpaceItemDecoration;
 
 /**
  * Created by Administrator on 2016/10/17.
  */
 public class NewGoodsFragment extends Fragment {
-    @Bind(R.id.tv_rfresh)
-    TextView tvRfresh;
-    @Bind(R.id.rv)
-    RecyclerView rv;
-    @Bind(R.id.srl)
-    SwipeRefreshLayout srl;
 
     MainActivity mContent;
     GoodsAdapter mAdapter;
     ArrayList<NewGoodsBean> mList;
     int pageId = 1;
     GridLayoutManager glm;
+    @BindView(R.id.tv_rfresh)
+    TextView tvRfresh;
+    @BindView(R.id.rv)
+    RecyclerView rv;
+    @BindView(R.id.srl)
+    SwipeRefreshLayout srl;
 
     @Nullable
     @Override
@@ -128,6 +129,7 @@ public class NewGoodsFragment extends Fragment {
     }
 
     private void initData() {
+        // downloadNewGoods(I.ACTION_DOWNLOAD);
         NetDao.downloadNewGoods(mContent, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
@@ -167,11 +169,6 @@ public class NewGoodsFragment extends Fragment {
         rv.setLayoutManager(glm);
         rv.setHasFixedSize(true);
         rv.setAdapter(mAdapter);
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        ButterKnife.unbind(this);
+        rv.addItemDecoration(new SpaceItemDecoration(12));
     }
 }

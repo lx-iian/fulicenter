@@ -4,28 +4,37 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
-    @Bind(R.id.rb_new_good)
+    @BindView(R.id.rb_new_good)
     RadioButton rbNewGood;
-    @Bind(R.id.rb_category)
+    @BindView(R.id.rb_category)
     RadioButton rbCategory;
-    @Bind(R.id.rb_boutique)
+    @BindView(R.id.rb_boutique)
     RadioButton rbBoutique;
-    @Bind(R.id.rb_cart)
+    @BindView(R.id.rb_cart)
     RadioButton rbCart;
-    @Bind(R.id.rb_personal_center)
+    @BindView(R.id.shopping_cart_num_bg)
+    LinearLayout shoppingCartNumBg;
+    @BindView(R.id.rb_personal_center)
     RadioButton rbPersonalCenter;
-    @Bind(R.id.rb_bottom_layout)
+    @BindView(R.id.rb_bottom_layout)
     RadioGroup rbBottomLayout;
-
+    @BindView(R.id.main_bottom)
+    LinearLayout mainBottom;
+    @BindView(R.id.fragment_container)
+    RelativeLayout fragmentContainer;
+    @BindView(R.id.mainLayout)
+    RelativeLayout mainLayout;
     private boolean isCart;
     private RadioButton[] rbs;
     private int index;

@@ -3,6 +3,7 @@ package zhou.com.fulicenter.net;
 import android.content.Context;
 
 import zhou.com.fulicenter.I;
+import zhou.com.fulicenter.bean.GoodsDetailsBean;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 
 /**
@@ -19,21 +20,11 @@ public class NetDao {
                 .execute(listener);
     }
 
-    public void temp(Context context) {
+    public static void downloadGoodsDetail(Context context, int goodsId, OkHttpUtils.OnCompleteListener<GoodsDetailsBean> listener) {
         OkHttpUtils utils = new OkHttpUtils(context);
-        utils.setRequestUrl(I.REQUEST_FIND_NEW_BOUTIQUE_GOODS)
-                .addParam(I.PAGE_SIZE, String.valueOf(20))
-                .targetClass(NewGoodsBean.class)
-                .execute(new OkHttpUtils.OnCompleteListener() {
-                    @Override
-                    public void onSuccess(Object result) {
-
-                    }
-
-                    @Override
-                    public void onError(String error) {
-
-                    }
-                });
+        utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
+                .addParam(I.GoodsDetails.KEY_GOODS_ID, String.valueOf(goodsId))
+                .targetClass(GoodsDetailsBean.class)
+                .execute(listener);
     }
 }

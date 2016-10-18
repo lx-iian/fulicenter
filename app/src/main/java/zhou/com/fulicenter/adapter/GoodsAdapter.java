@@ -11,12 +11,14 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 import zhou.com.fulicenter.utils.ImageLoader;
+import zhou.com.fulicenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -60,15 +62,16 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         } else {
             GoodsViewHolder gvh = (GoodsViewHolder) holder;
             NewGoodsBean goods = mList.get(position);
-            ImageLoader.downloadImg(mContext,gvh.ivGoodsThumb,goods.getGoodsThumb());
+            ImageLoader.downloadImg(mContext, gvh.ivGoodsThumb, goods.getGoodsThumb());
             gvh.tvGoodsName.setText(goods.getGoodsName());
             gvh.tvgGoodsPrice.setText(goods.getCurrencyPrice());
+            gvh.layoutGoods.setTag(goods.getGoodsId());
         }
     }
 
     private int getFootString() {
 
-        return isMore?R.string.load_more:R.string.no_more;
+        return isMore ? R.string.load_more : R.string.no_more;
     }
 
     @Override
@@ -98,24 +101,30 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     }
 
 
-    static class GoodsViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.ivGoodsThumb)
+    class GoodsViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.ivGoodsThumb)
         ImageView ivGoodsThumb;
-        @Bind(R.id.tvGoodsName)
+        @BindView(R.id.tvGoodsName)
         TextView tvGoodsName;
-        @Bind(R.id.tvgGoodsPrice)
+        @BindView(R.id.tvgGoodsPrice)
         TextView tvgGoodsPrice;
-        @Bind(R.id.layout_goods)
+        @BindView(R.id.layout_goods)
         LinearLayout layoutGoods;
 
         GoodsViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
         }
+
+        @OnClick(R.id.layout_goods)
+        public void onGoodsItemClick() {
+            int goodsId = (int) layoutGoods.getTag();
+            MFGT.gotoGoodsDetailsActivity(mContext, goodsId);
+        }
     }
 
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
-        @Bind(R.id.tvFooter)
+    class FooterViewHolder extends RecyclerView.ViewHolder {
+        @BindView(R.id.tvFooter)
         TextView tvFooter;
 
         FooterViewHolder(View view) {

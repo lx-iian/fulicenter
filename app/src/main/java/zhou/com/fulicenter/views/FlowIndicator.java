@@ -157,7 +157,7 @@ public class FlowIndicator extends View {
     }
 
     public void setFocus(int focus) {
-        mFocus = focus;
+        mFocus = focu/*s;
         invalidate();
     }
 
