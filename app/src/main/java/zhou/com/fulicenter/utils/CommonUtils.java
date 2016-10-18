@@ -2,9 +2,11 @@ package zhou.com.fulicenter.utils;
 
 import android.widget.Toast;
 
+import zhou.com.fulicenter.FuLiCenterApplication;
+
 
 public class CommonUtils {
-   /* public static void showLongToast(String msg){
+    public static void showLongToast(String msg){
         Toast.makeText(FuLiCenterApplication.getInstance(),msg,Toast.LENGTH_LONG).show();
     }
     public static void showShortToast(String msg){
@@ -15,5 +17,5 @@ public class CommonUtils {
     }
     public static void showShortToast(int rId){
         showShortToast(FuLiCenterApplication.getInstance().getString(rId));
-    }*/
+    }
 }

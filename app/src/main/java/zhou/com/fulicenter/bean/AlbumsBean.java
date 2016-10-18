@@ -1,9 +1,11 @@
 package zhou.com.fulicenter.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class AlbumsBean {
+public class AlbumsBean implements Serializable{
 
 
     private int pid;
@@ -41,9 +43,6 @@ public class AlbumsBean {
 
     public void setThumbUrl(String thumbUrl) {
         this.thumbUrl = thumbUrl;
-    }
-
-    public AlbumsBean() {
     }
 
     @Override

@@ -1,9 +1,11 @@
 package zhou.com.fulicenter.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class Result {
+public class Result implements Serializable {
 
     /**
      * retCode : 0
@@ -11,9 +13,24 @@ public class Result {
      * retData : null
      */
 
-    private int retCode;
+    private int retCode = -1;
     private boolean retMsg;
     private Object retData;
+
+    public Result() {
+    }
+
+    public Result(boolean retMsg, int retCode) {
+        this.retMsg = retMsg;
+        this.retCode = retCode;
+    }
+
+    public Result(int retCode, boolean retMsg, Object retData) {
+        super();
+        this.retCode = retCode;
+        this.retMsg = retMsg;
+        this.retData = retData;
+    }
 
     public int getRetCode() {
         return retCode;
@@ -39,15 +56,8 @@ public class Result {
         this.retData = retData;
     }
 
-    public Result() {
-    }
-
     @Override
     public String toString() {
-        return "Result{" +
-                "retCode=" + retCode +
-                ", retMsg=" + retMsg +
-                ", retData=" + retData +
-                '}';
+        return "Result [retCode=" + retCode + ", retMsg=" + retMsg + ", retData=" + retData + "]";
     }
 }

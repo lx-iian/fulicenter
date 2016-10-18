@@ -1,11 +1,12 @@
 package zhou.com.fulicenter.bean;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class GoodsDetailsBean {
+public class GoodsDetailsBean implements Serializable{
 
     /**
      * id : 280
@@ -37,32 +38,12 @@ public class GoodsDetailsBean {
     private String currencyPrice;
     private String promotePrice;
     private String rankPrice;
-    private boolean isPromote;
     private String goodsThumb;
     private String goodsImg;
     private long addTime;
     private String shareUrl;
-    private boolean promote;
-
-    private List<PropertiesBean> properties;
-
-    public List<AlbumsBean> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<AlbumsBean> albums) {
-        this.albums = albums;
-    }
-
-    private List<AlbumsBean> albums;
-
-    public List<PropertiesBean> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(List<PropertiesBean> properties) {
-        this.properties = properties;
-    }
+    private boolean isPromote;
+    private PropertiesBean[] properties;
 
     public int getId() {
         return id;
@@ -144,14 +125,6 @@ public class GoodsDetailsBean {
         this.rankPrice = rankPrice;
     }
 
-    public boolean isIsPromote() {
-        return isPromote;
-    }
-
-    public void setIsPromote(boolean isPromote) {
-        this.isPromote = isPromote;
-    }
-
     public String getGoodsThumb() {
         return goodsThumb;
     }
@@ -185,19 +158,24 @@ public class GoodsDetailsBean {
     }
 
     public boolean isPromote() {
-        return promote;
+        return isPromote;
     }
 
     public void setPromote(boolean promote) {
-        this.promote = promote;
+        this.isPromote = promote;
     }
 
-    public GoodsDetailsBean() {
+    public PropertiesBean[] getProperties() {
+        return properties;
+    }
+
+    public void setProperties(PropertiesBean[] properties) {
+        this.properties = properties;
     }
 
     @Override
     public String toString() {
-        return "GoodsDetailsBean{" +
+        return "GoodDetailsBean{" +
                 "id=" + id +
                 ", goodsId=" + goodsId +
                 ", catId=" + catId +
@@ -208,14 +186,12 @@ public class GoodsDetailsBean {
                 ", currencyPrice='" + currencyPrice + '\'' +
                 ", promotePrice='" + promotePrice + '\'' +
                 ", rankPrice='" + rankPrice + '\'' +
-                ", isPromote=" + isPromote +
                 ", goodsThumb='" + goodsThumb + '\'' +
                 ", goodsImg='" + goodsImg + '\'' +
                 ", addTime=" + addTime +
                 ", shareUrl='" + shareUrl + '\'' +
-                ", promote=" + promote +
+                ", promote=" + isPromote +
+                ", properties=" + Arrays.toString(properties) +
                 '}';
     }
-
-
 }

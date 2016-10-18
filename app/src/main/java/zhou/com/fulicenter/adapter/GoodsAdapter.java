@@ -24,11 +24,21 @@ import zhou.com.fulicenter.utils.ImageLoader;
 public class GoodsAdapter extends RecyclerView.Adapter {
     Context mContext;
     List<NewGoodsBean> mList;
+    boolean isMore;
 
     public GoodsAdapter(Context mContext, List<NewGoodsBean> list) {
         this.mContext = mContext;
         mList = new ArrayList<>();
         mList.addAll(list);
+    }
+
+    public boolean isMore() {
+        return isMore;
+    }
+
+    public void setMore(boolean more) {
+        isMore = more;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -45,7 +55,8 @@ public class GoodsAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == I.TYPE_FOOTER) {
-
+            FooterViewHolder gvh = (FooterViewHolder) holder;
+            gvh.tvFooter.setText(getFootString());
         } else {
             GoodsViewHolder gvh = (GoodsViewHolder) holder;
             NewGoodsBean goods = mList.get(position);
@@ -53,6 +64,11 @@ public class GoodsAdapter extends RecyclerView.Adapter {
             gvh.tvGoodsName.setText(goods.getGoodsName());
             gvh.tvgGoodsPrice.setText(goods.getCurrencyPrice());
         }
+    }
+
+    private int getFootString() {
+
+        return isMore?R.string.load_more:R.string.no_more;
     }
 
     @Override
@@ -75,6 +91,12 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         mList.addAll(list);
         notifyDataSetChanged();
     }
+
+    public void addData(ArrayList<NewGoodsBean> list) {
+        mList.addAll(list);
+        notifyDataSetChanged();
+    }
+
 
     static class GoodsViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.ivGoodsThumb)

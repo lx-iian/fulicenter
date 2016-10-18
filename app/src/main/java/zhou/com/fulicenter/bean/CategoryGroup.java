@@ -1,9 +1,11 @@
 package zhou.com.fulicenter.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class CategoryGroup {
+public class CategoryGroup implements Serializable{
     /**
      * id : 344
      * name : 最IN
@@ -38,16 +40,4 @@ public class CategoryGroup {
         this.imageUrl = imageUrl;
     }
 
-    public CategoryGroup() {
-        super();
-    }
-
-    @Override
-    public String toString() {
-        return "CategoryGroup{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                '}';
-    }
 }

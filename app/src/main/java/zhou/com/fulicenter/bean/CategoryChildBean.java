@@ -1,9 +1,11 @@
 package zhou.com.fulicenter.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class CategoryChildBean {
+public class CategoryChildBean implements Serializable{
 
     /**
      * id : 345
@@ -47,5 +49,15 @@ public class CategoryChildBean {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoryChildBean{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }

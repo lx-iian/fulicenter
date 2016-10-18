@@ -1,11 +1,12 @@
 package zhou.com.fulicenter.bean;
 
-import java.util.List;
+import java.io.Serializable;
+import java.util.Arrays;
 
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class PropertiesBean {
+public class PropertiesBean implements Serializable {
 
 
     /**
@@ -27,45 +28,14 @@ public class PropertiesBean {
      * properties : [{"id":8514,"goodsId":0,"colorId":4,"colorName":"绿色","colorCode":"#59d85c","colorImg":"201309/1380064997570506166.jpg","colorUrl":"https://cn.shopbop.com/alexa-chung-loretta-romper-ag/vp/v=1/1573999972.htm?fm=search-shopbysize&os=false","albums":[{"pid":6936,"imgId":26104,"imgUrl":"201508/goods_img/6936_P_1439535131675.png","thumbUrl":"no_picture.gif"}]},{"id":8514,"goodsId":0,"colorId":4,"colorName":"绿色","colorCode":"#59d85c","colorImg":"201309/1380064997570506166.jpg","colorUrl":"https://cn.shopbop.com/alexa-chung-loretta-romper-ag/vp/v=1/1573999972.htm?fm=search-shopbysize&os=false","albums":[{"pid":6936,"imgId":26104,"imgUrl":"201508/goods_img/6936_P_1439535131675.png","thumbUrl":"no_picture.gif"}]}]
      * promote : false
      */
-
     private int id;
     private int goodsId;
-    private int catId;
-    private String goodsName;
-    private String goodsEnglishName;
-    private String goodsBrief;
-    private String shopPrice;
-    private String currencyPrice;
-    private String promotePrice;
-    private String rankPrice;
-    private boolean isPromote;
-    private String goodsThumb;
-    private String goodsImg;
-    private long addTime;
-    private String shareUrl;
-    private boolean promote;
-    private  ColorBean colorBean;
-    private List<PropertiesBean> properties;
-
-    public PropertiesBean(ColorBean colorBean) {
-        this.colorBean = colorBean;
-    }
-
-    public List<PropertiesBean> getProperties() {
-        return properties;
-    }
-
-    public void setProperties(List<PropertiesBean> properties) {
-        this.properties = properties;
-    }
-
-    public ColorBean getColorBean() {
-        return colorBean;
-    }
-
-    public void setColorBean(ColorBean colorBean) {
-        this.colorBean = colorBean;
-    }
+    private int colorId;
+    private String colorName;
+    private String colorCode;
+    private String colorImg;
+    private String colorUrl;
+    private AlbumsBean[] albums;
 
     public int getId() {
         return id;
@@ -83,119 +53,52 @@ public class PropertiesBean {
         this.goodsId = goodsId;
     }
 
-    public int getCatId() {
-        return catId;
+    public int getColorId() {
+        return colorId;
     }
 
-    public void setCatId(int catId) {
-        this.catId = catId;
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
     }
 
-    public String getGoodsName() {
-        return goodsName;
+    public String getColorName() {
+        return colorName;
     }
 
-    public void setGoodsName(String goodsName) {
-        this.goodsName = goodsName;
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
     }
 
-    public String getGoodsEnglishName() {
-        return goodsEnglishName;
+    public String getColorCode() {
+        return colorCode;
     }
 
-    public void setGoodsEnglishName(String goodsEnglishName) {
-        this.goodsEnglishName = goodsEnglishName;
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
 
-    public String getGoodsBrief() {
-        return goodsBrief;
+    public String getColorImg() {
+        return colorImg;
     }
 
-    public void setGoodsBrief(String goodsBrief) {
-        this.goodsBrief = goodsBrief;
+    public void setColorImg(String colorImg) {
+        this.colorImg = colorImg;
     }
 
-    public String getShopPrice() {
-        return shopPrice;
+    public String getColorUrl() {
+        return colorUrl;
     }
 
-    public void setShopPrice(String shopPrice) {
-        this.shopPrice = shopPrice;
+    public void setColorUrl(String colorUrl) {
+        this.colorUrl = colorUrl;
     }
 
-    public String getCurrencyPrice() {
-        return currencyPrice;
+    public AlbumsBean[] getAlbums() {
+        return albums;
     }
 
-    public void setCurrencyPrice(String currencyPrice) {
-        this.currencyPrice = currencyPrice;
-    }
-
-    public String getPromotePrice() {
-        return promotePrice;
-    }
-
-    public void setPromotePrice(String promotePrice) {
-        this.promotePrice = promotePrice;
-    }
-
-    public String getRankPrice() {
-        return rankPrice;
-    }
-
-    public void setRankPrice(String rankPrice) {
-        this.rankPrice = rankPrice;
-    }
-
-    public boolean isIsPromote() {
-        return isPromote;
-    }
-
-    public void setIsPromote(boolean isPromote) {
-        this.isPromote = isPromote;
-    }
-
-    public String getGoodsThumb() {
-        return goodsThumb;
-    }
-
-    public void setGoodsThumb(String goodsThumb) {
-        this.goodsThumb = goodsThumb;
-    }
-
-    public String getGoodsImg() {
-        return goodsImg;
-    }
-
-    public void setGoodsImg(String goodsImg) {
-        this.goodsImg = goodsImg;
-    }
-
-    public long getAddTime() {
-        return addTime;
-    }
-
-    public void setAddTime(long addTime) {
-        this.addTime = addTime;
-    }
-
-    public String getShareUrl() {
-        return shareUrl;
-    }
-
-    public void setShareUrl(String shareUrl) {
-        this.shareUrl = shareUrl;
-    }
-
-    public boolean isPromote() {
-        return promote;
-    }
-
-    public void setPromote(boolean promote) {
-        this.promote = promote;
-    }
-
-    public PropertiesBean() {
+    public void setAlbums(AlbumsBean[] albums) {
+        this.albums = albums;
     }
 
     @Override
@@ -203,22 +106,12 @@ public class PropertiesBean {
         return "PropertiesBean{" +
                 "id=" + id +
                 ", goodsId=" + goodsId +
-                ", catId=" + catId +
-                ", goodsName='" + goodsName + '\'' +
-                ", goodsEnglishName='" + goodsEnglishName + '\'' +
-                ", goodsBrief='" + goodsBrief + '\'' +
-                ", shopPrice='" + shopPrice + '\'' +
-                ", currencyPrice='" + currencyPrice + '\'' +
-                ", promotePrice='" + promotePrice + '\'' +
-                ", rankPrice='" + rankPrice + '\'' +
-                ", isPromote=" + isPromote +
-                ", goodsThumb='" + goodsThumb + '\'' +
-                ", goodsImg='" + goodsImg + '\'' +
-                ", addTime=" + addTime +
-                ", shareUrl='" + shareUrl + '\'' +
-                ", promote=" + promote +
-                ", colorBean=" + colorBean +
-                ", properties=" + properties +
+                ", colorId=" + colorId +
+                ", colorName='" + colorName + '\'' +
+                ", colorCode='" + colorCode + '\'' +
+                ", colorImg='" + colorImg + '\'' +
+                ", colorUrl='" + colorUrl + '\'' +
+                ", albums=" + Arrays.toString(albums) +
                 '}';
     }
 }

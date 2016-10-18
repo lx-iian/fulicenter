@@ -1,9 +1,11 @@
 package zhou.com.fulicenter.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
-public class NewGoodsBean {
+public class NewGoodsBean implements Serializable{
 
     /**
      * id : 1
@@ -27,6 +29,7 @@ public class NewGoodsBean {
      * promote : false
      */
 
+
     private int id;
     private int goodsId;
     private int catId;
@@ -44,8 +47,7 @@ public class NewGoodsBean {
     private String colorName;
     private String colorCode;
     private String colorUrl;
-    private int addTime;
-    private boolean promote;
+    private String addTime;
 
     public int getId() {
         return id;
@@ -127,12 +129,12 @@ public class NewGoodsBean {
         this.rankPrice = rankPrice;
     }
 
-    public boolean isIsPromote() {
+    public boolean isPromote() {
         return isPromote;
     }
 
-    public void setIsPromote(boolean isPromote) {
-        this.isPromote = isPromote;
+    public void setPromote(boolean promote) {
+        this.isPromote = promote;
     }
 
     public String getGoodsThumb() {
@@ -183,28 +185,17 @@ public class NewGoodsBean {
         this.colorUrl = colorUrl;
     }
 
-    public int getAddTime() {
+    public String getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(int addTime) {
+    public void setAddTime(String addTime) {
         this.addTime = addTime;
-    }
-
-    public boolean isPromote() {
-        return promote;
-    }
-
-    public void setPromote(boolean promote) {
-        this.promote = promote;
-    }
-
-    public NewGoodsBean() {
     }
 
     @Override
     public String toString() {
-        return "NewGoodsBean{" +
+        return "NewGoodBean{" +
                 "id=" + id +
                 ", goodsId=" + goodsId +
                 ", catId=" + catId +
@@ -215,15 +206,14 @@ public class NewGoodsBean {
                 ", currencyPrice='" + currencyPrice + '\'' +
                 ", promotePrice='" + promotePrice + '\'' +
                 ", rankPrice='" + rankPrice + '\'' +
-                ", isPromote=" + isPromote +
+                ", promote=" + isPromote +
                 ", goodsThumb='" + goodsThumb + '\'' +
                 ", goodsImg='" + goodsImg + '\'' +
                 ", colorId=" + colorId +
                 ", colorName='" + colorName + '\'' +
                 ", colorCode='" + colorCode + '\'' +
                 ", colorUrl='" + colorUrl + '\'' +
-                ", addTime=" + addTime +
-                ", promote=" + promote +
+                ", addTime='" + addTime + '\'' +
                 '}';
     }
 }
