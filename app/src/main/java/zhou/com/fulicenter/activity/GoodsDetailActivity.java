@@ -2,19 +2,23 @@ package zhou.com.fulicenter.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
+import zhou.com.fulicenter.bean.AlbumsBean;
 import zhou.com.fulicenter.bean.GoodsDetailsBean;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.L;
+import zhou.com.fulicenter.utils.MFGT;
 import zhou.com.fulicenter.views.FlowIndicator;
 import zhou.com.fulicenter.views.SlideAutoLoopView;
 
@@ -86,9 +90,41 @@ public class GoodsDetailActivity extends AppCompatActivity {
         mTvGoodName.setText(details.getGoodsName());
         mTvGoodPriceCurrent.setText(details.getCurrencyPrice());
         mTvGoodPriceShop.setText(details.getShopPrice());
+        mSalv.startPlayLoop(mIndicator, getAlbumImgUri(details), getAlbumImgCount(details));
+        mWvGoodBrief.loadDataWithBaseURL(null, details.getGoodsBrief(), I.TEXT_HTML, I.UTF_8, null);
+    }
+
+    private int getAlbumImgCount(GoodsDetailsBean details) {
+        if (details.getProperties() != null && details.getProperties().length > 0) {
+            return details.getProperties()[0].getAlbums().length;
+        }
+        return 0;
+    }
+
+    private String[] getAlbumImgUri(GoodsDetailsBean details) {
+        String[] urls = new String[]{};
+        if (details.getProperties() != null && details.getProperties().length > 0) {
+            AlbumsBean[] albums = details.getProperties()[0].getAlbums();
+            urls = new String[albums.length];
+            for (int i = 0; i < albums.length; i++) {
+                urls[i] = albums[i].getImgUrl();
+            }
+        }
+        return urls;
     }
 
     private void initView() {
 
+    }
+
+    @OnClick(R.id.backClickArea)
+    public void onBackClick() {
+        MFGT.finish(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        MFGT.finish(this);
     }
 }
