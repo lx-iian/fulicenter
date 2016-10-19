@@ -1,8 +1,10 @@
 package zhou.com.fulicenter.net;
 
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 
 import zhou.com.fulicenter.I;
+import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.bean.GoodsDetailsBean;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 
@@ -25,6 +27,13 @@ public class NetDao {
         utils.setRequestUrl(I.REQUEST_FIND_GOOD_DETAILS)
                 .addParam(I.GoodsDetails.KEY_GOODS_ID, String.valueOf(goodsId))
                 .targetClass(GoodsDetailsBean.class)
+                .execute(listener);
+    }
+
+    public static void downloadBoutique(Context context, OkHttpUtils.OnCompleteListener<BoutiqueBean[]> listener) {
+        OkHttpUtils utils = new OkHttpUtils(context);
+        utils.setRequestUrl(I.REQUEST_FIND_BOUTIQUES)
+                .targetClass(BoutiqueBean[].class)
                 .execute(listener);
     }
 }

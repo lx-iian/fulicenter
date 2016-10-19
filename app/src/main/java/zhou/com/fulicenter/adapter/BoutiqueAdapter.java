@@ -22,10 +22,9 @@ import zhou.com.fulicenter.views.FooterViewHolder;
 /**
  * Created by Administrator on 2016/10/19.
  */
-public class BoutiqueAdapter extends RecyclerView.Adapter {
+public class BoutiqueAdapter extends RecyclerView.Adapter<BoutiqueAdapter.BoutiqueViewHolder> {
     Context mContext;
     ArrayList<BoutiqueBean> mList;
-    boolean isMore;
 
     public BoutiqueAdapter(Context mContext, ArrayList<BoutiqueBean> list) {
         this.mContext = mContext;
@@ -33,57 +32,33 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
         mList.addAll(list);
     }
 
-    public boolean isMore() {
-        return isMore;
-    }
-
-    public void setMore(boolean more) {
-        isMore = more;
-        notifyDataSetChanged();
-    }
-
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
-        if (viewType == I.TYPE_FOOTER) {
-            holder = new FooterViewHolder(LayoutInflater.
-                    from(mContext).inflate(R.layout.item_footer, parent, false));
-        } else {
-            holder = new BoutiqueViewHolder(LayoutInflater.from(mContext)
-                    .inflate(R.layout.item_boutique, parent, false));
-        }
+    public BoutiqueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        BoutiqueViewHolder holder = new BoutiqueViewHolder(LayoutInflater.from(mContext)
+                .inflate(R.layout.item_boutique, parent, false));
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof FooterViewHolder) {
-            ((FooterViewHolder) holder).tvFooter.setText(getFooterString());
-        }
-        if (holder instanceof BoutiqueAdapter.BoutiqueViewHolder) {
-            BoutiqueBean boutiqueBean = mList.get(position);
-            ImageLoader.downloadImg(mContext, ((BoutiqueViewHolder) holder).mIvBoutiqueImg, boutiqueBean.getImageurl());
-            ((BoutiqueViewHolder) holder).mTvBoutiqueTitle.setText(boutiqueBean.getTitle());
-            ((BoutiqueViewHolder) holder).mTvBoutiqueName.setText(boutiqueBean.getName());
-            ((BoutiqueViewHolder) holder).mTvBoutiqueDescription.setText(boutiqueBean.getDescription());
-        }
-    }
-
-    private int getFooterString() {
-        return isMore ? R.string.load_more : R.string.no_more;
+    public void onBindViewHolder(BoutiqueViewHolder holder, int position) {
+        BoutiqueBean boutiqueBean = mList.get(position);
+        ImageLoader.downloadImg(mContext, holder.mIvBoutiqueImg, boutiqueBean.getImageurl());
+        holder.mTvBoutiqueTitle.setText(boutiqueBean.getTitle());
+        holder.mTvBoutiqueName.setText(boutiqueBean.getName());
+        holder.mTvBoutiqueDescription.setText(boutiqueBean.getDescription());
     }
 
     @Override
     public int getItemCount() {
-        return mList != null ? mList.size() + 1 : 1;
+        return mList != null ? mList.size() : 0;
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        if (position == getItemCount() - 1) {
-            return I.TYPE_FOOTER;
+    public void initData(ArrayList<BoutiqueBean> list) {
+        if (mList != null) {
+            mList.clear();
         }
-        return I.TYPE_ITEM;
+        mList.addAll(list);
+        notifyDataSetChanged();
     }
 
     class BoutiqueViewHolder extends RecyclerView.ViewHolder {

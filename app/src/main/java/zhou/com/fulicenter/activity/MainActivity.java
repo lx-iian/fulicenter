@@ -2,6 +2,7 @@ package zhou.com.fulicenter.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -12,6 +13,7 @@ import android.widget.RelativeLayout;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
+import zhou.com.fulicenter.fragment.BoutiqueFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,10 +38,13 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.mainLayout)
     RelativeLayout mainLayout;
     private boolean isCart;
+
     private RadioButton[] rbs;
+    private int currentIndex;
     private int index;
     Fragment[] mFragments;
     NewGoodsFragment mNewGoodsFragment;
+    BoutiqueFragment mBoutiqueFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +59,14 @@ public class MainActivity extends AppCompatActivity {
     private void initFragment() {
         mFragments = new Fragment[5];
         mNewGoodsFragment = new NewGoodsFragment();
+        mBoutiqueFragment = new BoutiqueFragment();
+        mFragments[0] = mNewGoodsFragment;
+        mFragments[2] = mBoutiqueFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
+                .add(R.id.fragment_container,mBoutiqueFragment)
+                .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment)
                 .commit();
     }
@@ -103,7 +113,21 @@ public class MainActivity extends AppCompatActivity {
                 index = 4;
                 break;
         }
+        setFragment();
         setRadioButtomSatatus();
+    }
+
+    private void setFragment() {
+        if (index != currentIndex) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.hide(mFragments[currentIndex]);
+            if (!mFragments[index].isAdded()) {
+                ft.add(R.id.fragment_container, mFragments[index]);
+            }
+            ft.show(mFragments[index]).commit();
+        }
+        setRadioButtomSatatus();
+        currentIndex = index;
     }
 
   /*  private void setOtherRb() {
@@ -122,5 +146,4 @@ public class MainActivity extends AppCompatActivity {
             isCart = false;
         }
     }*/
-
 }
