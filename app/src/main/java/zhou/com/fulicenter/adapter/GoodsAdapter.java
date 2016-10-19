@@ -123,7 +123,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    class FooterViewHolder extends RecyclerView.ViewHolder {
+    static class FooterViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.tvFooter)
         TextView tvFooter;
 

@@ -100,8 +100,7 @@ public class NewGoodsFragment extends Fragment {
         NetDao.downloadNewGoods(mContent, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
             @Override
             public void onSuccess(NewGoodsBean[] result) {
-                srl.setRefreshing(false
-                );
+                srl.setRefreshing(false);
                 tvRfresh.setVisibility(View.GONE);
                 mAdapter.setMore(true);
                 L.e("result=" + result);
@@ -112,8 +111,7 @@ public class NewGoodsFragment extends Fragment {
                     } else {
                         mAdapter.addData(list);
                     }
-                    mAdapter.initData(list);
-                    if (list.size() < I.PAGE_ID_DEFAULT) {
+                    if (list.size() < I.PAGE_SIZE_DEFAULT) {
                         mAdapter.setMore(false);
                     }
                 } else {
@@ -123,39 +121,17 @@ public class NewGoodsFragment extends Fragment {
 
             @Override
             public void onError(String error) {
-
+                srl.setRefreshing(false);
+                tvRfresh.setVisibility(View.GONE);
+                mAdapter.setMore(false);
+                CommonUtils.showShortToast(error);
+                L.e("error" + error);
             }
         });
     }
 
     private void initData() {
-        // downloadNewGoods(I.ACTION_DOWNLOAD);
-        NetDao.downloadNewGoods(mContent, pageId, new OkHttpUtils.OnCompleteListener<NewGoodsBean[]>() {
-            @Override
-            public void onSuccess(NewGoodsBean[] result) {
-                srl.setRefreshing(false);
-                tvRfresh.setVisibility(View.GONE);
-                mAdapter.setMore(true);
-                L.e("result" + result);
-                if (result != null && result.length > 0) {
-                    ArrayList<NewGoodsBean> list = ConvertUtils.array2List(result);
-                    mAdapter.initData(list);
-                    if (list.size() < I.PAGE_ID_DEFAULT) {
-                        mAdapter.setMore(false);
-                    } else {
-                        mAdapter.setMore(false);
-                    }
-                }
-            }
-
-            @Override
-            public void onError(String error) {
-                srl.setRefreshing(false);
-                tvRfresh.setVisibility(View.GONE);
-                CommonUtils.showShortToast(error);
-                L.e("error" + error);
-            }
-        });
+        downloadNewGoods(I.ACTION_DOWNLOAD);
     }
 
     private void initView() {
