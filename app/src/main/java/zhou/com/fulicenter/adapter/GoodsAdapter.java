@@ -19,6 +19,7 @@ import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 import zhou.com.fulicenter.utils.ImageLoader;
 import zhou.com.fulicenter.utils.MFGT;
+import zhou.com.fulicenter.views.FooterViewHolder;
 
 /**
  * Created by Administrator on 2016/10/17.
@@ -123,13 +124,4 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         }
     }
 
-    static class FooterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tvFooter)
-        TextView tvFooter;
-
-        FooterViewHolder(View view) {
-            super(view);
-            ButterKnife.bind(this, view);
-        }
-    }
 }

@@ -17,6 +17,7 @@ import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.utils.ImageLoader;
+import zhou.com.fulicenter.views.FooterViewHolder;
 
 /**
  * Created by Administrator on 2016/10/19.
@@ -45,7 +46,7 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder holder = null;
         if (viewType == I.TYPE_FOOTER) {
-            holder = new GoodsAdapter.FooterViewHolder(LayoutInflater.
+            holder = new FooterViewHolder(LayoutInflater.
                     from(mContext).inflate(R.layout.item_footer, parent, false));
         } else {
             holder = new BoutiqueViewHolder(LayoutInflater.from(mContext)
@@ -56,8 +57,8 @@ public class BoutiqueAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof GoodsAdapter.FooterViewHolder) {
-            ((GoodsAdapter.FooterViewHolder) holder).tvFooter.setText(getFooterString());
+        if (holder instanceof FooterViewHolder) {
+            ((FooterViewHolder) holder).tvFooter.setText(getFooterString());
         }
         if (holder instanceof BoutiqueAdapter.BoutiqueViewHolder) {
             BoutiqueBean boutiqueBean = mList.get(position);
