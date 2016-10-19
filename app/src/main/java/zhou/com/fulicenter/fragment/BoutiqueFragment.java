@@ -29,8 +29,8 @@ import zhou.com.fulicenter.views.SpaceItemDecoration;
  * Created by Administrator on 2016/10/19.
  */
 public class BoutiqueFragment extends BaseFragment {
-    @BindView(R.id.tv_rfresh)
-    TextView mTvRfresh;
+    @BindView(R.id.tv_refresh)
+    TextView mTvRefresh;
     @BindView(R.id.rv)
     RecyclerView mRv;
     @BindView(R.id.srl)
@@ -63,7 +63,7 @@ public class BoutiqueFragment extends BaseFragment {
             @Override
             public void onRefresh() {
                 mSrl.setRefreshing(true);
-                mTvRfresh.setVisibility(View.VISIBLE);
+                mTvRefresh.setVisibility(View.VISIBLE);
                 downloadBoutique();
             }
         });
@@ -79,7 +79,7 @@ public class BoutiqueFragment extends BaseFragment {
             @Override
             public void onSuccess(BoutiqueBean[] result) {
                 mSrl.setRefreshing(false);
-                mTvRfresh.setVisibility(View.GONE);
+                mTvRefresh.setVisibility(View.GONE);
                 L.e("result=" + result);
                 if (result != null && result.length > 0) {
                     ArrayList<BoutiqueBean> list = ConvertUtils.array2List(result);
@@ -90,7 +90,7 @@ public class BoutiqueFragment extends BaseFragment {
             @Override
             public void onError(String error) {
                 mSrl.setRefreshing(false);
-                mTvRfresh.setVisibility(View.GONE);
+                mTvRefresh.setVisibility(View.GONE);
                 CommonUtils.showShortToast(error);
                 L.e("error" + error);
             }

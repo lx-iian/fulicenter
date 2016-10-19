@@ -116,4 +116,9 @@ public class GoodsDetailActivity extends BaseActivity {
     protected void initView() {
 
     }
+
+    @OnClick(R.id.backClickArea)
+    public void onClick() {
+        MFGT.finish(this);
+    }
 }
