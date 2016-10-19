@@ -30,7 +30,7 @@ import zhou.com.fulicenter.views.SpaceItemDecoration;
 /**
  * Created by Administrator on 2016/10/17.
  */
-public class NewGoodsFragment extends Fragment {
+public class NewGoodsFragment extends BaseFragment {
 
     MainActivity mContent;
     GoodsAdapter mAdapter;
@@ -52,13 +52,12 @@ public class NewGoodsFragment extends Fragment {
         mContent = (MainActivity) getContext();
         mList = new ArrayList<>();
         mAdapter = new GoodsAdapter(mContent, mList);
-        initView();
-        initData();
-        setListener();
+        super.onCreateView(inflater, container, savedInstanceState);
         return layout;
     }
 
-    private void setListener() {
+    @Override
+    protected void setListener() {
         setPullUpListener();
         setPullDownListener();
     }
@@ -130,11 +129,13 @@ public class NewGoodsFragment extends Fragment {
         });
     }
 
-    private void initData() {
+    @Override
+    protected void initData() {
         downloadNewGoods(I.ACTION_DOWNLOAD);
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         srl.setColorSchemeColors(
                 getResources().getColor(R.color.google_blue),
                 getResources().getColor(R.color.google_green),

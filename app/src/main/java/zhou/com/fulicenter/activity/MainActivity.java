@@ -3,7 +3,6 @@ package zhou.com.fulicenter.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -15,8 +14,9 @@ import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.BoutiqueFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
+import zhou.com.fulicenter.utils.L;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     @BindView(R.id.rb_new_good)
     RadioButton rbNewGood;
     @BindView(R.id.rb_category)
@@ -48,12 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        // setListener();
-        initView();
-        initFragment();
+        L.i("MainActivity onCreate");
+        super.onCreate(savedInstanceState);
     }
 
     private void initFragment() {
@@ -65,19 +63,30 @@ public class MainActivity extends AppCompatActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.fragment_container, mNewGoodsFragment)
-                .add(R.id.fragment_container,mBoutiqueFragment)
+                .add(R.id.fragment_container, mBoutiqueFragment)
                 .hide(mBoutiqueFragment)
                 .show(mNewGoodsFragment)
                 .commit();
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         rbs = new RadioButton[5];
         rbs[0] = rbNewGood;
         rbs[1] = rbCategory;
         rbs[2] = rbBoutique;
         rbs[3] = rbCart;
         rbs[4] = rbPersonalCenter;
+    }
+
+    @Override
+    protected void initData() {
+        initFragment();
+    }
+
+    @Override
+    protected void setListener() {
+
     }
 
     private void setRadioButtomSatatus() {
@@ -130,7 +139,12 @@ public class MainActivity extends AppCompatActivity {
         currentIndex = index;
     }
 
-  /*  private void setOtherRb() {
+    @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    /*  private void setOtherRb() {
         if (!isCart) {
             isCart = true;
             rbNewGood.setChecked(false);
