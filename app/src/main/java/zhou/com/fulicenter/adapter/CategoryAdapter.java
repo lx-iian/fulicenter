@@ -16,6 +16,7 @@ import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.CategoryChildBean;
 import zhou.com.fulicenter.bean.CategoryGroupBean;
 import zhou.com.fulicenter.utils.ImageLoader;
+import zhou.com.fulicenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/20.
@@ -101,10 +102,16 @@ public class CategoryAdapter extends BaseExpandableListAdapter {
         } else {
             holder = (ChildViewHolder) view.getTag();
         }
-        CategoryChildBean child = getChild(groupPosition, childPosition);
+        final CategoryChildBean child = getChild(groupPosition, childPosition);
         if (child != null) {
             ImageLoader.downloadImg(mContext, holder.mIvCategoryChildThumb, child.getImageUrl());
             holder.mTvCategoryChildName.setText(child.getName());
+            holder.mLayoutCategoryChild.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    MFGT.gotoCategoryChildActivity(mContext, child.getId());
+                }
+            });
         }
         return view;
     }

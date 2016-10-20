@@ -46,7 +46,8 @@ public class MainActivity extends BaseActivity {
     Fragment[] mFragments;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
-    CategoryFragment mCategoryFragment;
+    CategoryFragment
+            mCategoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +61,7 @@ public class MainActivity extends BaseActivity {
         mFragments = new Fragment[5];
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
+        mCategoryFragment = new CategoryFragment();
         mFragments[0] = mNewGoodsFragment;
         mFragments[1] = mCategoryFragment;
         mFragments[2] = mBoutiqueFragment;
