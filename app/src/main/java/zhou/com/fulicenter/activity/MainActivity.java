@@ -13,6 +13,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.BoutiqueFragment;
+import zhou.com.fulicenter.fragment.CategoryFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 import zhou.com.fulicenter.utils.L;
 
@@ -45,6 +46,7 @@ public class MainActivity extends BaseActivity {
     Fragment[] mFragments;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
+    CategoryFragment mCategoryFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,7 @@ public class MainActivity extends BaseActivity {
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mFragments[0] = mNewGoodsFragment;
+        mFragments[1] = mCategoryFragment;
         mFragments[2] = mBoutiqueFragment;
         getSupportFragmentManager()
                 .beginTransaction()

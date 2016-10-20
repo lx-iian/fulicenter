@@ -1,11 +1,11 @@
 package zhou.com.fulicenter.bean;
 
 import java.io.Serializable;
-
 /**
- * Created by Administrator on 2016/10/13.
+ * Created by Administrator on 2016/10/20.
  */
-public class CategoryGroup implements Serializable{
+
+public class CategoryGroupBean implements Serializable {
     /**
      * id : 344
      * name : 最IN
