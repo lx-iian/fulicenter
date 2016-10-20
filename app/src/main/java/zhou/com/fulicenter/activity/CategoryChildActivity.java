@@ -1,5 +1,6 @@
 package zhou.com.fulicenter.activity;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
@@ -16,6 +17,7 @@ import butterknife.OnClick;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.adapter.GoodsAdapter;
+import zhou.com.fulicenter.bean.CategoryChildBean;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
@@ -23,6 +25,7 @@ import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.ConvertUtils;
 import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
+import zhou.com.fulicenter.views.CatChildFilterButton;
 import zhou.com.fulicenter.views.SpaceItemDecoration;
 
 public class CategoryChildActivity extends BaseActivity {
@@ -46,6 +49,10 @@ public class CategoryChildActivity extends BaseActivity {
     boolean addTimeAsc = false;
     boolean proceAsc = true;
     int sortBy = I.SORT_BY_ADDTIME_DESC;
+    @BindView(R.id.btnCatChildFilter)
+    CatChildFilterButton mBtnCatChildFilter;
+    ArrayList<CategoryChildBean> mChildList;
+    String groupName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,8 @@ public class CategoryChildActivity extends BaseActivity {
         if (catId == 0) {
             finish();
         }
+        groupName = getIntent().getStringExtra(I.CategoryGroup.NAME);
+        mChildList = (ArrayList<CategoryChildBean>) getIntent().getSerializableExtra(I.CategoryChild.ID);
         super.onCreate(savedInstanceState);
     }
 
@@ -74,6 +83,8 @@ public class CategoryChildActivity extends BaseActivity {
         mRv.setHasFixedSize(true);
         mRv.setAdapter(mAdapter);
         mRv.addItemDecoration(new SpaceItemDecoration(12));
+        mBtnCatChildFilter.setText(groupName);
+
     }
 
     @Override
@@ -152,6 +163,7 @@ public class CategoryChildActivity extends BaseActivity {
     @Override
     protected void initData() {
         downloadCategoryGoods(I.ACTION_DOWNLOAD);
+        mBtnCatChildFilter.setOnCatFilterClickListener(groupName, mChildList);
     }
 
     @OnClick(R.id.backClickArea)
@@ -162,21 +174,31 @@ public class CategoryChildActivity extends BaseActivity {
     @OnClick({R.id.btn_sort_price, R.id.btn_sort_addtime})
     public void onClick(View view) {
         L.e("sortBy...");
+        Drawable right;
         switch (view.getId()) {
             case R.id.btn_sort_price:
                 if (proceAsc) {
                     sortBy = I.SORT_BY_PRICE_ASC;
+                    right = getResources().getDrawable(R.mipmap.arrow_order_up);
                 } else {
                     sortBy = I.SORT_BY_PRICE_DESC;
+                    right = getResources().getDrawable(R.mipmap.arrow_order_down);
                 }
+                right.setBounds(0, 0, right.getIntrinsicWidth(), right.getIntrinsicHeight());
+                mBbtnSortPrice.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, right, null);
                 proceAsc = !proceAsc;
                 break;
             case R.id.btn_sort_addtime:
                 if (addTimeAsc) {
                     sortBy = I.SORT_BY_ADDTIME_ASC;
+                    right = getResources().getDrawable(R.mipmap.arrow_order_up);
                 } else {
                     sortBy = I.SORT_BY_ADDTIME_DESC;
+                    right = getResources().getDrawable(R.mipmap.arrow_order_up);
+
                 }
+                right.setBounds(0, 0, right.getIntrinsicWidth(), right.getIntrinsicHeight());
+                mBtnSortAddtime.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, right, null);
                 addTimeAsc = !addTimeAsc;
                 break;
         }

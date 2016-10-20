@@ -7,13 +7,45 @@
     android:orientation="vertical"
     tools:context="zhou.com.fulicenter.activity.CategoryChildActivity">
 
-    <include layout="@layout/common_head_title" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/main_orange">
+
+        <LinearLayout
+            android:id="@+id/backClickArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back" />
+        </LinearLayout>
+
+        <zhou.com.fulicenter.views.CatChildFilterButton
+            android:id="@+id/btnCatChildFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="55dp"
+            android:layout_marginRight="10dp"
+            android:drawableRight="@drawable/arrow2_up"
+            android:background="@null"
+            android:textColor="@color/white"
+            android:text="分类"/>
+
+    </RelativeLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
-        android:background="@color/orange"
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="40dp"
+        android:background="@color/orange"
+        android:orientation="horizontal">
 
         <Button
             android:id="@+id/btn_sort_price"
@@ -24,15 +56,17 @@
             android:drawableRight="@drawable/arrow_order_down"
             android:paddingRight="5dp"
             android:text="价格" />
+
         <Button
             android:id="@+id/btn_sort_addtime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@null"
-            android:text="上架时间"
             android:drawableRight="@drawable/arrow_order_down"
             android:paddingRight="5dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content" />
+            android:text="上架时间" />
     </LinearLayout>
+
     <include layout="@layout/fragment_newgoods" />
 </LinearLayout>
