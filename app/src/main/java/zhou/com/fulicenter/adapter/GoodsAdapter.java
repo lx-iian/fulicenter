@@ -116,7 +116,7 @@ public class GoodsAdapter extends RecyclerView.Adapter {
         ImageView ivGoodsThumb;
         @BindView(R.id.tvGoodsName)
         TextView tvGoodsName;
-        @BindView(R.id.tvgGoodsPrice)
+        @BindView(R.id.tvGoodsPrice)
         TextView tvgGoodsPrice;
         @BindView(R.id.layout_goods)
         LinearLayout layoutGoods;

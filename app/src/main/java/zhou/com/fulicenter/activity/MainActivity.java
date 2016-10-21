@@ -11,11 +11,13 @@ import android.widget.RelativeLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import zhou.com.fulicenter.FuLiCenterApplication;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.BoutiqueFragment;
 import zhou.com.fulicenter.fragment.CategoryFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 import zhou.com.fulicenter.utils.L;
+import zhou.com.fulicenter.utils.MFGT;
 
 public class MainActivity extends BaseActivity {
     @BindView(R.id.rb_new_good)
@@ -124,8 +126,14 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rb_personal_center:
                 //  setCart();
-                index = 4;
-                break;
+                if (FuLiCenterApplication.getUsername() == null) {
+                    MFGT.gotoLoginActivity(this);
+                } else {
+                    index = 4;
+                }
+                MFGT.gotoLoginActivity(this);
+                return;
+               // break;
         }
         setFragment();
         setRadioButtomSatatus();

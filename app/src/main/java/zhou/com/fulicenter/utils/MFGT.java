@@ -10,8 +10,10 @@ import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.activity.BoutiqueChildActivity;
 import zhou.com.fulicenter.activity.CategoryChildActivity;
 import zhou.com.fulicenter.activity.GoodsDetailActivity;
+import zhou.com.fulicenter.activity.LoginActivity;
 import zhou.com.fulicenter.activity.MainActivity;
 import zhou.com.fulicenter.R;
+import zhou.com.fulicenter.activity.RegisterActivity;
 import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.bean.CategoryChildBean;
 
@@ -55,8 +57,23 @@ public class MFGT {
         Intent intent = new Intent();
         intent.setClass(context, CategoryChildActivity.class);
         intent.putExtra(I.CategoryChild.CAT_ID, catId);
-        intent.putExtra(I.CategoryGroup.NAME,groupName);
+        intent.putExtra(I.CategoryGroup.NAME, groupName);
         intent.putExtra(I.CategoryChild.ID, list);
         startActivity(context, intent);
+    }
+
+    public static void gotoLoginActivity(Activity context) {
+        startActivity(context, LoginActivity.class);
+    }
+
+    public static void gotoRegisterActivity(Activity context) {
+        Intent intent = new Intent();
+        intent.setClass(context, RegisterActivity.class);
+        startActivityForResult(context, intent, I.REQUEST_COOD_REGISTER);
+    }
+
+    public static void startActivityForResult(Activity context, Intent intent, int requestCode) {
+        context.startActivityForResult(intent, requestCode);
+        context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
     }
 }

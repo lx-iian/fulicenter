@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="zhou.com.fulicenter.activity.RegisterActivity">
+
+    <include layout="@layout/common_head_title" />
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:gravity="fill_vertical"
+        android:layout_marginRight="20dp"
+        android:hint="用户名"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/nick"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_height="50dp"
+        android:gravity="fill_vertical"
+        android:hint="昵称"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_nick"
+        android:gravity="fill"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/confirmPassword"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@+id/tv_nick"
+        android:layout_marginRight="20dp"
+        android:gravity="fill"
+        android:hint="确认密码"
+        android:inputType="textPassword"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_password"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/tb_btn_login_orange_normal"
+        android:text="注 册"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>

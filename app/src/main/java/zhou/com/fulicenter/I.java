@@ -1,6 +1,5 @@
 package zhou.com.fulicenter;
 
-
 public interface I {
     String SERVER_ROOT = "http://101.251.196.90:8000/FuLiCenterServerV2.0/";
     /** 下拉刷新*/
@@ -46,7 +45,7 @@ public interface I {
     int ACTION_ADD_COLLECT=1;
     /** 取消收藏*/
     int ACTION_DELETE_COLLECT=2;
-    
+
     int NEW_GOOD=0;
     int CATEGORY_GOOD=1;
     int CAT_ID=0;
@@ -311,6 +310,7 @@ public interface I {
     int MSG_LOGIN_UNKNOW_USER=401;//账户不存在
     int MSG_LOGIN_ERROR_PASSWORD=402;//账户密码错误
     int MSG_LOGIN_SUCCESS=403;//登陆成功
+    int REQUEST_COOD_REGISTER=0;
     int MSG_USER_SAME_NICK=404;//昵称未修改
     int MSG_USER_UPDATE_NICK_SUCCESS=405;//昵称修改成功
     int MSG_USER_UPDATE_NICK_FAIL=406;//昵称修改失败
