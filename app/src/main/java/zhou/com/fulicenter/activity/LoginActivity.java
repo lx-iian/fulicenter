@@ -18,6 +18,7 @@ import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.Result;
 import zhou.com.fulicenter.bean.UserAvatar;
+import zhou.com.fulicenter.dao.SharePreferenceUtils;
 import zhou.com.fulicenter.dao.UserDao;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
@@ -116,6 +117,7 @@ public class LoginActivity extends BaseActivity {
                         UserDao dao = new UserDao(mContent);
                         boolean isSuccess = dao.saveUser(user);
                         if (isSuccess) {
+                            SharePreferenceUtils.getInstance(mContent).saveUser(user.getMuserName());
                             FuLiCenterApplication.setUser(user);
                             MFGT.finish(mContent);
                         } else {
