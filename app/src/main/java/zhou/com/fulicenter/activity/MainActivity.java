@@ -16,6 +16,7 @@ import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.BoutiqueFragment;
 import zhou.com.fulicenter.fragment.CategoryFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
+import zhou.com.fulicenter.fragment.PersonalCenterFragment;
 import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
 
@@ -48,8 +49,8 @@ public class MainActivity extends BaseActivity {
     Fragment[] mFragments;
     NewGoodsFragment mNewGoodsFragment;
     BoutiqueFragment mBoutiqueFragment;
-    CategoryFragment
-            mCategoryFragment;
+    CategoryFragment mCategoryFragment;
+    PersonalCenterFragment mPersonalCenterFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,7 @@ public class MainActivity extends BaseActivity {
         mNewGoodsFragment = new NewGoodsFragment();
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
+        mPersonalCenterFragment = new PersonalCenterFragment();
         mFragments[0] = mNewGoodsFragment;
         mFragments[1] = mCategoryFragment;
         mFragments[2] = mBoutiqueFragment;
@@ -131,12 +133,12 @@ public class MainActivity extends BaseActivity {
                 } else {
                     index = 4;
                 }
-                MFGT.gotoLoginActivity(this);
-                return;
-               // break;
+                /*MFGT.gotoLoginActivity(this);
+                return;*/
+                break;
         }
         setFragment();
-        setRadioButtomSatatus();
+       // setRadioButtomSatatus();
     }
 
     private void setFragment() {
