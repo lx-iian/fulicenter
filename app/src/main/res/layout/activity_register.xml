@@ -8,7 +8,7 @@
 
     <include layout="@layout/common_head_title" />
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/r_username"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
@@ -27,7 +27,7 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/password"
+        android:id="@+id/r_password"
         android:layout_width="match_parent"
         android:layout_marginRight="20dp"
         android:layout_height="50dp"

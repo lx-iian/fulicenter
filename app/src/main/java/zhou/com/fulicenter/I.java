@@ -17,6 +17,8 @@ public interface I {
     int TYPE_ITEM=0;
     int TYPE_FOOTER=1;
 
+    int REQUEST_COOE_REGISTER=101;
+
     /** BeeColud APP ID */
     String BEE_COLUD_APP_ID = "3539b590-4859-4128-87a3-5fb8b86b94f6";
     /** BeeColud APP Secret*/
@@ -310,7 +312,6 @@ public interface I {
     int MSG_LOGIN_UNKNOW_USER=401;//账户不存在
     int MSG_LOGIN_ERROR_PASSWORD=402;//账户密码错误
     int MSG_LOGIN_SUCCESS=403;//登陆成功
-    int REQUEST_COOD_REGISTER=0;
     int MSG_USER_SAME_NICK=404;//昵称未修改
     int MSG_USER_UPDATE_NICK_SUCCESS=405;//昵称修改成功
     int MSG_USER_UPDATE_NICK_FAIL=406;//昵称修改失败

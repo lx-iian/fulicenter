@@ -14,9 +14,9 @@
     <string name="nickname">昵称</string>
     <string name="password">密码</string>
     <string name="confirmpassword">确认密码</string>
-    <string name="register">新用户注册</string>
+    <string name="register">用户注册</string>
     <string name="user_name_connot_be_empty">帐号不能为空</string>
-    <string name="illegal_user_name">非法帐号,6-16个数字和字母组合,请以字母开头</string>
+    <string name="illegal_user_name">请重新注册，请以字母开头,6-16个数字和字母组合</string>
     <string name="nick_name_connot_be_empty">昵称不能为空</string>
     <string name="password_connot_be_empty">密码不能为空</string>
     <string name="confirm_password_connot_be_empty">确认密码不能为空</string>
@@ -30,5 +30,6 @@
     <string name="login_fail">登陆失败</string>
     <string name="login_fail_unknow_user">登陆失败，未知的用户名</string>
     <string name="login_fail_unknow_password">登陆失败，密码错误</string>
+    <string name="user_database_error">用户数据库操作异常</string>
 
 </resources>

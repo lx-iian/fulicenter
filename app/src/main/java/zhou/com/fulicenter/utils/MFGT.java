@@ -69,7 +69,7 @@ public class MFGT {
     public static void gotoRegisterActivity(Activity context) {
         Intent intent = new Intent();
         intent.setClass(context, RegisterActivity.class);
-        startActivityForResult(context, intent, I.REQUEST_COOD_REGISTER);
+        startActivityForResult(context, intent, I.REQUEST_COOE_REGISTER);
     }
 
     public static void startActivityForResult(Activity context, Intent intent, int requestCode) {

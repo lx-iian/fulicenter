@@ -2,6 +2,8 @@ package zhou.com.fulicenter;
 
 import android.app.Application;
 
+import zhou.com.fulicenter.bean.UserAvatar;
+
 /**
  * Created by Administrator on 2016/10/17.
  */
@@ -10,6 +12,7 @@ public class FuLiCenterApplication extends Application{
     private static FuLiCenterApplication instance;
 
     private static String username;
+    private static UserAvatar user;
 
     @Override
     public void onCreate() {
@@ -29,4 +32,11 @@ public class FuLiCenterApplication extends Application{
         return username;
     }
 
+    public static UserAvatar getUser() {
+        return user;
+    }
+
+    public static void setUser(UserAvatar user) {
+        FuLiCenterApplication.user = user;
+    }
 }

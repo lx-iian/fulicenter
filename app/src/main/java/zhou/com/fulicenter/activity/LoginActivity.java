@@ -1,11 +1,9 @@
 package zhou.com.fulicenter.activity;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,14 +13,18 @@ import android.widget.TextView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zhou.com.fulicenter.FuLiCenterApplication;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.Result;
+import zhou.com.fulicenter.bean.UserAvatar;
+import zhou.com.fulicenter.dao.UserDao;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
+import zhou.com.fulicenter.utils.ResultUtils;
 import zhou.com.fulicenter.views.DisplayUtils;
 
 public class LoginActivity extends BaseActivity {
@@ -100,17 +102,25 @@ public class LoginActivity extends BaseActivity {
         pd.setMessage(getResources().getString(R.string.login));
         pd.show();
         L.e(TAG, "username=" + username + ", password=" + password);
-        NetDao.login(mContent, username, password, new OkHttpUtils.OnCompleteListener<Result>() {
+        NetDao.login(mContent, username, password, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
-            public void onSuccess(Result result) {
-                pd.dismiss();
+            public void onSuccess(String string) {
+                Result result = ResultUtils.getResultFromJson(string, UserAvatar.class);
                 L.e(TAG, "result=" + result);
                 if (result == null) {
                     CommonUtils.showLongToast(R.string.login_fail);
                 } else {
                     if (result.isRetMsg()) {
-                        I.User user = (I.User) result.getRetData();
+                        UserAvatar user = (UserAvatar) result.getRetData();
                         L.e(TAG, "user" + user);
+                        UserDao dao = new UserDao(mContent);
+                        boolean isSuccess = dao.saveUser(user);
+                        if (isSuccess) {
+                            FuLiCenterApplication.setUser(user);
+                            MFGT.finish(mContent);
+                        } else {
+                            CommonUtils.showLongToast(R.string.user_database_error);
+                        }
                         MFGT.finish(mContent);
                     } else {
                         if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
@@ -122,6 +132,7 @@ public class LoginActivity extends BaseActivity {
                         }
                     }
                 }
+                pd.dismiss();
             }
 
             @Override
@@ -133,11 +144,10 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-
     @Override
-    public void onActivityReenter(int resultCode, Intent data) {
-        super.onActivityReenter(resultCode, data);
-        if (resultCode == RESULT_OK && resultCode == I.REQUEST_COOD_REGISTER) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == I.REQUEST_COOE_REGISTER) {
             String name = data.getStringExtra(I.User.USER_NAME);
             mUsername.setText(name);
         }

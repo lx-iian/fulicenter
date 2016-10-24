@@ -1,7 +1,6 @@
 package zhou.com.fulicenter.net;
 
 import android.content.Context;
-import android.support.v4.content.ContextCompat;
 
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.bean.BoutiqueBean;
@@ -77,13 +76,12 @@ public class NetDao {
                 .execute(listener);
     }
 
-    public static void login(Context context, String usernamne, String password, OkHttpUtils.OnCompleteListener<Result> listener) {
-        OkHttpUtils<Result> utils = new OkHttpUtils<>(context);
+    public static void login(Context context, String username, String password, OkHttpUtils.OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_LOGIN)
-                .addParam(I.User.USER_NAME,usernamne)
+                .addParam(I.User.USER_NAME,username)
                 .addParam(I.User.PASSWORD,MD5.getMessageDigest(password))
-                .targetClass(Result.class)
+                .targetClass(String.class)
                 .execute(listener);
-
     }
 }

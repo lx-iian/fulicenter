@@ -1,6 +1,7 @@
 package zhou.com.fulicenter.activity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -29,11 +30,11 @@ public class RegisterActivity extends BaseActivity {
     LinearLayout mBackClickArea;
     @BindView(R.id.tv_common_title)
     TextView mTvCommonTitle;
-    @BindView(R.id.username)
+    @BindView(R.id.r_username)
     EditText mUsername;
     @BindView(R.id.nick)
     EditText mNick;
-    @BindView(R.id.password)
+    @BindView(R.id.r_password)
     EditText mPassword;
     @BindView(R.id.confirmPassword)
     EditText mConfirmPassword;
@@ -43,15 +44,14 @@ public class RegisterActivity extends BaseActivity {
     String username;
     String nick;
     String password;
-    RegisterActivity mContent;
+    RegisterActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_register);
         ButterKnife.bind(this);
-        mContent = this;
+        mContext = this;
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -79,7 +79,7 @@ public class RegisterActivity extends BaseActivity {
             CommonUtils.showShortToast(R.string.user_name_connot_be_empty);
             mUsername.requestFocus();
             return;
-        } else if (!username.matches("[a-zA-Z]//w{5,15}")) {
+        } else if (!username.matches("[a-zA-Z]\\w{5,15}")) {
             CommonUtils.showShortToast(R.string.illegal_user_name);
             mUsername.requestFocus();
             return;
@@ -93,21 +93,21 @@ public class RegisterActivity extends BaseActivity {
             return;
         } else if (TextUtils.isEmpty(confirmPassword)) {
             CommonUtils.showShortToast(R.string.confirm_password_connot_be_empty);
-            mPassword.requestFocus();
+            mConfirmPassword.requestFocus();
             return;
         } else if (!password.equals(confirmPassword)) {
             CommonUtils.showShortToast(R.string.two_input_password);
-            mPassword.requestFocus();
+            mConfirmPassword.requestFocus();
             return;
         }
         register();
     }
 
     private void register() {
-        final ProgressDialog pd = new ProgressDialog(mContent);
+        final ProgressDialog pd = new ProgressDialog(mContext);
         pd.setMessage(getResources().getString(R.string.registering));
         pd.show();
-        NetDao.register(mContent, username, nick, password, new OkHttpUtils.OnCompleteListener<Result>() {
+        NetDao.register(mContext, username, nick, password, new OkHttpUtils.OnCompleteListener<Result>() {
             @Override
             public void onSuccess(Result result) {
                 pd.dismiss();
@@ -117,7 +117,7 @@ public class RegisterActivity extends BaseActivity {
                     if (result.isRetMsg()) {
                         CommonUtils.showLongToast(R.string.register_success);
                         setResult(RESULT_OK, new Intent().putExtra(I.User.USER_NAME, username));
-                        MFGT.finish(mContent);
+                        MFGT.finish(mContext);
                     } else {
                         CommonUtils.showLongToast(R.string.register_fail_exists);
                         mUsername.requestFocus();
