@@ -1,5 +1,6 @@
 package zhou.com.fulicenter.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 
@@ -30,5 +31,22 @@ public class FileUtils {
 		dir=getDir(context, newImgName);
 		File newFile=new File(dir);
 		oldFile.renameTo(newFile);
+	}
+
+	/**
+	 * 返回头像的路径
+	 * @param avatarType：头像的类型，user_avatar：用户头像，group_icon：群组logo
+	 * @param fileName：头像的文件名，如a.jpg
+	 * @return
+	 */
+	public static File getAvatarPath(Activity activity, String avatarType, String fileName) {
+		File dir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File dir =Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+		dir = new File(dir, avatarType);
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		File file = new File(dir, fileName);
+		return file;
 	}
 }

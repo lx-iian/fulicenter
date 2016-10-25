@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_update_avatar"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bottom_bar_normal_bg_top"
@@ -64,20 +65,12 @@
             android:id="@+id/tv_user_account_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="5dp"
-            android:layout_toLeftOf="@+id/ivRightArrow2"
+            android:layout_marginRight="55dp"
             android:text="dada"
             android:textSize="20sp" />
 
-        <ImageView
-            android:id="@+id/ivRightArrow2"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="20dp"
-            android:src="@drawable/right_arrow_icon" />
     </RelativeLayout>
 
 

@@ -145,11 +145,11 @@ public class OnSetAvatarListener implements View.OnClickListener {
 
     /**拍照:启动系统拍照的Activity，要求返回拍照结果*/
     private void takePicture() {
-       /* File file = FileUtils.getAvatarPath(mActivity,mAvatarType, mUserName + ".jpg");
+        File file = FileUtils.getAvatarPath(mActivity,mAvatarType, mUserName + ".jpg");
         Uri uri = Uri.fromFile(file);
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
-        mActivity.startActivityForResult(intent,REQUEST_TAKE_PICTURE);*/
+        mActivity.startActivityForResult(intent,REQUEST_TAKE_PICTURE);
     }
 
     /**
@@ -198,7 +198,7 @@ public class OnSetAvatarListener implements View.OnClickListener {
             return;
         }
         ivAvatar.setImageBitmap(avatar);
-  /*      File file = FileUtils.getAvatarPath(mActivity,mAvatarType, mUserName + ".jpg");
+        File file = FileUtils.getAvatarPath(mActivity,mAvatarType, mUserName + ".jpg");
         if(!file.getParentFile().exists()){
             Toast.makeText(mActivity, "照片保存失败,保存的路径不存在", Toast.LENGTH_LONG).show();
             return ;
@@ -210,14 +210,14 @@ public class OnSetAvatarListener implements View.OnClickListener {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             Log.i("main", "头像保存失败");
-        }*/
+        }
     }
 
     /**
      * 保存头像至sd卡的Android文件夹
      * @param data
      */
-   /* public static File saveCropAndShowAvatar(Intent data, Activity context, String avatarType, String avatarName) {
+    public static File saveCropAndShowAvatar(Intent data, Activity context, String avatarType, String avatarName) {
         Bundle extras = data.getExtras();
         Bitmap avatar = extras.getParcelable("data");
         if (avatar == null) {
@@ -237,7 +237,7 @@ public class OnSetAvatarListener implements View.OnClickListener {
             Log.i("main", "头像保存失败");
         }
         return file;
-    }*/
+    }
 
     /**
      * 启动裁剪的Activity

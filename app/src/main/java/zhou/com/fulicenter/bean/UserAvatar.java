@@ -2,6 +2,8 @@ package zhou.com.fulicenter.bean;
 
 import java.io.Serializable;
 
+import zhou.com.fulicenter.I;
+
 /**
  * Created by Administrator on 2016/10/13.
  */
@@ -58,7 +60,7 @@ public class UserAvatar implements Serializable{
     }
 
     public String getMavatarSuffix() {
-        return mavatarSuffix;
+        return mavatarSuffix != null ? mavatarSuffix : I.AVATAR_SUFFIX_JPG;
     }
 
     public void setMavatarSuffix(String mavatarSuffix) {
