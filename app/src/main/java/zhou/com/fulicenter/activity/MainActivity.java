@@ -171,7 +171,7 @@ public class MainActivity extends BaseActivity {
         setFragment();
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         L.e(TAG, "onActivityResult, requestCode=" + requestCode);
@@ -179,7 +179,7 @@ public class MainActivity extends BaseActivity {
             index = 4;
             L.e(TAG,"user-" + data);
         }
-    }
+    }*/
 
     /*  private void setOtherRb() {
         if (!isCart) {

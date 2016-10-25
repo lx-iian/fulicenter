@@ -46,19 +46,19 @@ public class LoginActivity extends BaseActivity {
 
     String username;
     String password;
-    LoginActivity mContent;
+    LoginActivity mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-        mContent = this;
+        mContext = this;
         super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void initView() {
-        DisplayUtils.initBackWithTitle(this, "用户登陆");
+        DisplayUtils.initBackWithTitle(mContext,getResources().getString(R.string.login));
     }
 
     @Override
@@ -99,11 +99,11 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void login() {
-        final ProgressDialog pd = new ProgressDialog(mContent);
+        final ProgressDialog pd = new ProgressDialog(mContext);
         pd.setMessage(getResources().getString(R.string.login));
         pd.show();
         L.e(TAG, "username=" + username + ", password=" + password);
-        NetDao.login(mContent, username, password, new OkHttpUtils.OnCompleteListener<String>() {
+        NetDao.login(mContext, username, password, new OkHttpUtils.OnCompleteListener<String>() {
             @Override
             public void onSuccess(String string) {
                 Result result = ResultUtils.getResultFromJson(string, UserAvatar.class);
@@ -114,16 +114,17 @@ public class LoginActivity extends BaseActivity {
                     if (result.isRetMsg()) {
                         UserAvatar user = (UserAvatar) result.getRetData();
                         L.e(TAG, "user" + user);
-                        UserDao dao = new UserDao(mContent);
+                        UserDao dao = new UserDao(mContext);
                         boolean isSuccess = dao.saveUser(user);
                         if (isSuccess) {
-                            SharePreferenceUtils.getInstance(mContent).saveUser(user.getMuserName());
+                            SharePreferenceUtils.getInstance(mContext).saveUser(user.getMuserName());
                             FuLiCenterApplication.setUser(user);
-                            MFGT.finish(mContent);
+                            L.e(TAG, "setUser=" + user);
+                            MFGT.finish(mContext);
                         } else {
                             CommonUtils.showLongToast(R.string.user_database_error);
                         }
-                        MFGT.finish(mContent);
+                        MFGT.finish(mContext);
                     } else {
                         if (result.getRetCode() == I.MSG_LOGIN_UNKNOW_USER) {
                             CommonUtils.showLongToast(R.string.login_fail_unknow_user);

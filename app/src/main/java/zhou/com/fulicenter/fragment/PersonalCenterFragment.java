@@ -76,14 +76,11 @@ public class PersonalCenterFragment extends BaseFragment {
     @Override
     public void onResume() {
         super.onResume();
-
+        initData();
     }
 
-    @OnClick({R.id.tvAccountManagement, R.id.ivUserAvatar, R.id.tvUserName})
-    public void gotoAccountManager(View view) {
-        MFGT.gotoAccountManagerActivity(mContext);
-    }
 
+/*
     @OnClick({R.id.tvCenterSetting})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -91,6 +88,45 @@ public class PersonalCenterFragment extends BaseFragment {
                 break;
 
         }
+    }*/
+
+
+    @OnClick({R.id.tvCenterSetting, R.id.tvAccountManagement, R.id.ivUserAvatar, R.id.tvUserName})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvCenterSetting:
+                break;
+            case R.id.tvAccountManagement:
+                gotoAccountManager();
+                break;
+            case R.id.ivUserAvatar:
+                if (user == null) {
+                    gotoLogin();
+                    return;
+                }
+                gotoAccountManager();
+                break;
+            case R.id.tvUserName:
+                if (user != null) {
+                    gotoAccountManager();
+                } else {
+                    gotoLogin();
+                }
+                break;
+        }
+    }
+
+    public void gotoAccountManager() {
+        MFGT.gotoAccountManagerActivity(mContext);
+    }
+
+    public void gotoLogin() {
+        MFGT.gotoLoginActivity(mContext);
+    }
+
+/*    @OnClick({R.id.tvAccountManagement, R.id.ivUserAvatar, R.id.tvUserName})
+    public void gotoAccountManager(View view) {
+        MFGT.gotoAccountManagerActivity(mContext);
     }
 
     @OnClick({R.id.ivUserAvatar, R.id.tvUserName})
@@ -100,5 +136,5 @@ public class PersonalCenterFragment extends BaseFragment {
         } else {
             MFGT.gotoAccountManagerActivity(mContext);
         }
-    }
+    }*/
 }

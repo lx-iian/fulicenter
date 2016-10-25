@@ -15,6 +15,7 @@ import zhou.com.fulicenter.activity.GoodsDetailActivity;
 import zhou.com.fulicenter.activity.LoginActivity;
 import zhou.com.fulicenter.activity.MainActivity;
 import zhou.com.fulicenter.activity.RegisterActivity;
+import zhou.com.fulicenter.activity.UpdateNickActivity;
 import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.bean.CategoryChildBean;
 
@@ -82,5 +83,10 @@ public class MFGT {
 
     public static void gotoAccountManagerActivity(Activity context) {
         startActivity(context, AccountManagerActivity.class);
+    }
+
+    public static void gotoUpdateNickActivity(Activity context) {
+        startActivityForResult(context, new Intent(context, UpdateNickActivity.class),I.REQUEST_CODE_NICK);
+
     }
 }

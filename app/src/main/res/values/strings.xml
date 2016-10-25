@@ -39,5 +39,9 @@
     <string name="user_database_error">user_database_error</string>
     <string name="user_account_manager">account management</string>
     <string name="user_account_name_normal">login/register</string>
+    <string name="update_user_nick">update user nick</string>
+    <string name="update_nick_fail_unmodify">update nick fail unmodify</string>
+    <string name="update_fail">update fail</string>
+    <string name="update_user_nick_success">updateuser nick success</string>
 
 </resources>

@@ -91,7 +91,7 @@
                 android:padding="5dp"
                 android:text="账户管理"
                 android:textSize="18sp"
-                android:visibility="gone" />
+                android:visibility="invisible" />
 
         </RelativeLayout>
 

@@ -56,7 +56,7 @@ public class RegisterActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        DisplayUtils.initBackWithTitle(this, "用户注册");
+        DisplayUtils.initBackWithTitle(this, "注　册");
     }
 
     @Override
