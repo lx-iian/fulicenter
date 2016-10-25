@@ -31,6 +31,12 @@ public class PersonalCenterFragment extends BaseFragment {
     TextView mTvUserName;
 
     MainActivity mContext;
+    @BindView(R.id.iv2QR_Code)
+    ImageView mIv2QRCode;
+    @BindView(R.id.tvAccountManagement)
+    TextView mTvAccountManagement;
+
+    UserAvatar user = null;
 
     @Nullable
     @Override
@@ -49,22 +55,50 @@ public class PersonalCenterFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-        UserAvatar user = FuLiCenterApplication.getUser();
+        user = FuLiCenterApplication.getUser();
         L.e(TAG, "user=" + user);
         if (user == null) {
-            MFGT.gotoLoginActivity(mContext);
+            mTvUserName.setText(R.string.user_account_name_normal);
+            mTvAccountManagement.setVisibility(View.INVISIBLE);
         } else {
-            ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user),mContext,mIvUserAvatar);
+            ImageLoader.setAvatar(ImageLoader.getAvatarUrl(user), mContext, mIvUserAvatar);
             mTvUserName.setText(user.getMuserNick());
+            mIv2QRCode.setVisibility(View.VISIBLE);
+            mTvAccountManagement.setVisibility(View.VISIBLE);
         }
     }
 
     @Override
     protected void setListener() {
+        initData();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
 
     }
 
-    @OnClick(R.id.tvCenterSetting)
-    public void onClick() {
+    @OnClick({R.id.tvAccountManagement, R.id.ivUserAvatar, R.id.tvUserName})
+    public void gotoAccountManager(View view) {
+        MFGT.gotoAccountManagerActivity(mContext);
+    }
+
+    @OnClick({R.id.tvCenterSetting})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tvCenterSetting:
+                break;
+
+        }
+    }
+
+    @OnClick({R.id.ivUserAvatar, R.id.tvUserName})
+    public void gotoLogin(View view) {
+        if (user == null) {
+            MFGT.gotoLoginActivity(mContext);
+        } else {
+            MFGT.gotoAccountManagerActivity(mContext);
+        }
     }
 }

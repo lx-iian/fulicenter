@@ -13,14 +13,14 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:gravity="fill_vertical"
-        android:layout_marginRight="20dp"
         android:hint="用户名"
+        android:paddingLeft="20dp"
         android:textSize="20sp" />
 
     <EditText
         android:id="@+id/nick"
+        android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="20dp"
         android:layout_height="50dp"
         android:gravity="fill_vertical"
         android:hint="昵称"
@@ -28,8 +28,8 @@
 
     <EditText
         android:id="@+id/r_password"
+        android:paddingLeft="20dp"
         android:layout_width="match_parent"
-        android:layout_marginRight="20dp"
         android:layout_height="50dp"
         android:layout_below="@+id/tv_nick"
         android:gravity="fill"
@@ -39,10 +39,10 @@
 
     <EditText
         android:id="@+id/confirmPassword"
+        android:paddingLeft="20dp"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:layout_below="@+id/tv_nick"
-        android:layout_marginRight="20dp"
         android:gravity="fill"
         android:hint="确认密码"
         android:inputType="textPassword"
@@ -53,10 +53,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_password"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/tb_btn_login_orange_normal"
+        android:background="@drawable/shape_radius"
         android:text="注 册"
         android:textColor="@color/white"
         android:textSize="20sp" />

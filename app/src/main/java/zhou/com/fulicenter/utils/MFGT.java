@@ -7,12 +7,13 @@ import android.content.Intent;
 import java.util.ArrayList;
 
 import zhou.com.fulicenter.I;
+import zhou.com.fulicenter.R;
+import zhou.com.fulicenter.activity.AccountManagerActivity;
 import zhou.com.fulicenter.activity.BoutiqueChildActivity;
 import zhou.com.fulicenter.activity.CategoryChildActivity;
 import zhou.com.fulicenter.activity.GoodsDetailActivity;
 import zhou.com.fulicenter.activity.LoginActivity;
 import zhou.com.fulicenter.activity.MainActivity;
-import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.activity.RegisterActivity;
 import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.bean.CategoryChildBean;
@@ -77,5 +78,9 @@ public class MFGT {
     public static void startActivityForResult(Activity context, Intent intent, int requestCode) {
         context.startActivityForResult(intent, requestCode);
         context.overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+    }
+
+    public static void gotoAccountManagerActivity(Activity context) {
+        startActivity(context, AccountManagerActivity.class);
     }
 }

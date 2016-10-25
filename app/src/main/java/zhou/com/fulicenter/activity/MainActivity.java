@@ -133,11 +133,11 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rb_personal_center:
                 //  setCart();
-                if (FuLiCenterApplication.getUsername() == null) {
+              /*  if (FuLiCenterApplication.getUsername() == null) {
                     MFGT.gotoLoginActivity(this);
-                } else {
+                } else {*/
                     index = 4;
-                }
+               // }
                 /*MFGT.gotoLoginActivity(this);
                 return;*/
                 break;

@@ -37,5 +37,7 @@
     </string>
     <string name="login_fail_unknow_user">login fail, unknow username</string>
     <string name="user_database_error">user_database_error</string>
+    <string name="user_account_manager">account management</string>
+    <string name="user_account_name_normal">login/register</string>
 
 </resources>
