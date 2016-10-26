@@ -48,5 +48,6 @@
     <string name="my_live_coupon">生活券</string>
     <string name="my_online_store_coupon">网店劵</string>
     <string name="my_vip_card">会员卡</string>
+    <string name="delete_collect_fail">删除收藏失败</string>
 
 </resources>

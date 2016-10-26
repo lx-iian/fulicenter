@@ -17,11 +17,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zhou.com.fulicenter.FuLiCenterApplication;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.CollectBean;
+import zhou.com.fulicenter.bean.MessageBean;
 import zhou.com.fulicenter.bean.NewGoodsBean;
+import zhou.com.fulicenter.net.NetDao;
+import zhou.com.fulicenter.net.OkHttpUtils;
+import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.ImageLoader;
+import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
 import zhou.com.fulicenter.views.FooterViewHolder;
 
@@ -69,7 +75,7 @@ public class CollectsAdapter extends RecyclerView.Adapter {
             CollectBean collects = mList.get(position);
             ImageLoader.downloadImg(mContext, gvh.ivGoodsThumb, collects.getGoodsThumb());
             gvh.tvGoodsName.setText(collects.getGoodsName());
-            gvh.layoutGoods.setTag(collects.getGoodsId());
+            gvh.layoutGoods.setTag(collects);
         }
     }
 
@@ -124,9 +130,31 @@ public class CollectsAdapter extends RecyclerView.Adapter {
 
         @OnClick(R.id.layout_goods)
         public void onGoodsItemClick() {
-            int goodsId = (int) layoutGoods.getTag();
-            MFGT.gotoGoodsDetailsActivity(mContext, goodsId);
+            CollectBean collects = (CollectBean) layoutGoods.getTag();
+            MFGT.gotoGoodsDetailsActivity(mContext, collects.getId());
+        }
+
+        @OnClick(R.id.iv_collect_delete)
+        public void deleleCollect() {
+            final CollectBean collects = (CollectBean) layoutGoods.getTag();
+            String username = FuLiCenterApplication.getUser().getMuserName();
+            NetDao.deleteCollect(mContext, username, collects.getId(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        mList.remove(collects);
+                        notifyDataSetChanged();
+                    } else {
+                        CommonUtils.showLongToast(result != null ? result.getMsg() : mContext.getResources().getString(R.string.delete_collect_fail));
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    L.e("error=" + error);
+                    CommonUtils.showLongToast(mContext.getResources().getString(R.string.delete_collect_fail));
+                }
+            });
         }
     }
-
 }

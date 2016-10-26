@@ -126,13 +126,22 @@ public class NetDao {
                 .execute(listener);
     }*/
 
-    public static void downloadCollects(Context context, String username, int pageId,OkHttpUtils.OnCompleteListener<CollectBean[]> listener) {
+    public static void downloadCollects(Context context, String username, int pageId, OkHttpUtils.OnCompleteListener<CollectBean[]> listener) {
         OkHttpUtils<CollectBean[]> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_FIND_COLLECTS)
                 .addParam(I.Collect.USER_NAME, username)
                 .addParam(I.PAGE_ID, String.valueOf(pageId))
                 .addParam(I.PAGE_SIZE, String.valueOf(I.PAGE_SIZE_DEFAULT))
                 .targetClass(CollectBean[].class)
+                .execute(listener);
+    }
+
+    public static void deleteCollect(Context context, String username, int goodsId, OkHttpUtils.OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_DELETE_COLLECT)
+                .addParam(I.Collect.USER_NAME, username)
+                .addParam(I.Collect.GOODS_ID, String.valueOf(goodsId))
+                .targetClass(MessageBean.class)
                 .execute(listener);
     }
 }

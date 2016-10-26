@@ -62,6 +62,7 @@
         <string name="my_live_coupon">live coupon</string>
         <string name="my_online_store_coupon">online store coupon</string>
         <string name="my_vip_card">VIP Card</string>
+    <string name="delete_collect_fail">delete collect fail</string>
 
 
 </resources>
