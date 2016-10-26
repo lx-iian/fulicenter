@@ -1,19 +1,21 @@
 package zhou.com.fulicenter.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.webkit.WebView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import zhou.com.fulicenter.FuLiCenterApplication;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.bean.AlbumsBean;
 import zhou.com.fulicenter.bean.GoodsDetailsBean;
+import zhou.com.fulicenter.bean.MessageBean;
+import zhou.com.fulicenter.bean.UserAvatar;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.CommonUtils;
@@ -40,9 +42,12 @@ public class GoodsDetailActivity extends BaseActivity {
     FlowIndicator mIndicator;
     @BindView(R.id.wv_good_brief)
     WebView mWvGoodBrief;
+    @BindView(R.id.iv_good_collect)
+    ImageView mIvGoodCollect;
 
     int goodsId;
     GoodsDetailActivity mContext;
+    boolean isCollected = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,8 +122,87 @@ public class GoodsDetailActivity extends BaseActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isCollected();
+    }
+
     @OnClick(R.id.backClickArea)
     public void onClick() {
         MFGT.finish(this);
+    }
+
+    @OnClick(R.id.iv_good_collect)
+    public void oncollectClick() {
+        UserAvatar user = FuLiCenterApplication.getUser();
+        if (user == null) {
+
+        }else {
+            if (isCollected) {
+                NetDao.deleteCollect(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null && result.isSuccess()) {
+                            isCollected = !isCollected;
+                            updateGoodsCollectStatus();
+                            CommonUtils.showLongToast(result.getMsg());
+                        }
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+            } else {
+                NetDao.addCollect(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        isCollected = !isCollected;
+                        updateGoodsCollectStatus();
+                        CommonUtils.showLongToast(result.getMsg());
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
+            }
+        }
+    }
+
+    private void isCollected() {
+        UserAvatar user = FuLiCenterApplication.getUser();
+        if (user != null) {
+
+            NetDao.isColected(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        isCollected = true;
+                    } else {
+                        isCollected = false;
+                    }
+                    updateGoodsCollectStatus();
+                }
+
+                @Override
+                public void onError(String error) {
+                    isCollected = false;
+                    updateGoodsCollectStatus();
+                }
+            });
+        }
+        updateGoodsCollectStatus();
+    }
+
+    private void updateGoodsCollectStatus() {
+        if (isCollected) {
+            mIvGoodCollect.setImageResource(R.mipmap.bg_collect_out);
+        } else {
+            mIvGoodCollect.setImageResource(R.mipmap.bg_collect_in);
+        }
     }
 }

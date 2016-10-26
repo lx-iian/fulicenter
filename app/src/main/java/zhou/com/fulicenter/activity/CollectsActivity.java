@@ -147,6 +147,13 @@ public class CollectsActivity extends BaseActivity {
         if (user == null) {
             finish();
         }
-      //  downloadCollects(I.ACTION_DOWNLOAD);
+       downloadCollects(I.ACTION_DOWNLOAD);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initData();
+        mAdapter.notifyDataSetChanged();
     }
 }

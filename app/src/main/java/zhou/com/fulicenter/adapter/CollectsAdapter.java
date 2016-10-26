@@ -157,4 +157,5 @@ public class CollectsAdapter extends RecyclerView.Adapter {
             });
         }
     }
+
 }
