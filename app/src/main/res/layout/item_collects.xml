@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_goods"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/layout_goods"
     android:layout_margin="15dp"
     android:background="@color/white"
     android:orientation="vertical"
@@ -21,6 +21,7 @@
         android:id="@+id/tvGoodsName"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/ivGoodsThumb"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -35,6 +36,7 @@
         android:id="@+id/tvGoodsPrice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGoodsName"
         android:layout_marginBottom="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -42,4 +44,12 @@
         android:text="$399.99"
         android:textColor="@color/item_good_price"
         android:textSize="13sp" />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_collect_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:padding="5dp"
+        android:src="@mipmap/delete" />
+</RelativeLayout>

@@ -8,7 +8,9 @@ import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.bean.BoutiqueBean;
 import zhou.com.fulicenter.bean.CategoryChildBean;
 import zhou.com.fulicenter.bean.CategoryGroupBean;
+import zhou.com.fulicenter.bean.CollectBean;
 import zhou.com.fulicenter.bean.GoodsDetailsBean;
+import zhou.com.fulicenter.bean.MessageBean;
 import zhou.com.fulicenter.bean.NewGoodsBean;
 import zhou.com.fulicenter.bean.Result;
 import zhou.com.fulicenter.utils.MD5;
@@ -107,4 +109,30 @@ public class NetDao {
                 .execute(listener);
     }
 
+    public static void syncUserInfo(Context context, String username, OkHttpUtils.OnCompleteListener<String> listener) {
+        OkHttpUtils<String> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_USER)
+                .addParam(I.User.USER_NAME, username)
+                .targetClass(String.class)
+                .execute(listener);
+    }
+
+    // 老版本的收藏
+/*    public static void getCollectsCount(Context context, String username, OkHttpUtils.OnCompleteListener<MessageBean> listener) {
+        OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_COLLECT_COUNT)
+                .addParam(I.User.USER_NAME, username)
+                .targetClass(MessageBean.class)
+                .execute(listener);
+    }*/
+
+    public static void downloadCollects(Context context, String username, int pageId,OkHttpUtils.OnCompleteListener<CollectBean[]> listener) {
+        OkHttpUtils<CollectBean[]> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_COLLECTS)
+                .addParam(I.Collect.USER_NAME, username)
+                .addParam(I.PAGE_ID, String.valueOf(pageId))
+                .addParam(I.PAGE_SIZE, String.valueOf(I.PAGE_SIZE_DEFAULT))
+                .targetClass(CollectBean[].class)
+                .execute(listener);
+    }
 }

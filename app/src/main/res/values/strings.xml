@@ -46,5 +46,22 @@
     <string name="update_user_avatar">update user avatar</string>
     <string name="update_user_avatar_fail">update user avatar fail</string>
     <string name="update_user_avatar_success">update user avatar success</string>
+    <string name="collect_title">collect center</string>
+    <!--my tools-->
+   <!-- <string-array name="my_tools">
+        <item name="my_collects">my collects</item>
+        <item name="my_shop_of_collects">my shop of collects</item>
+        <item name="my_footmark">footmark</item>
+        <item name="my_live_coupon">live coupon</item>
+        <item name="my_online_store_coupon">online store coupon</item>
+        <item name="my_vip_card">VIP Card</item>
+    </string-array>-->
+        <string name="my_collects">my collects</string>
+        <string name="my_shop_of_collects">my shop of collects</string>
+        <string name="my_footmark">footmark</string>
+        <string name="my_live_coupon">live coupon</string>
+        <string name="my_online_store_coupon">online store coupon</string>
+        <string name="my_vip_card">VIP Card</string>
+
 
 </resources>

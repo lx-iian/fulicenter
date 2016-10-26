@@ -14,7 +14,7 @@
     <string name="nickname">昵称</string>
     <string name="password">密码</string>
     <string name="confirmpassword">确认密码</string>
-    <string name="register">用户注册</string>
+    <string name="register">注　册</string>
     <string name="user_name_connot_be_empty">帐号不能为空</string>
     <string name="illegal_user_name">请重新注册，请以字母开头,6-16个数字和字母组合</string>
     <string name="nick_name_connot_be_empty">昵称不能为空</string>
@@ -40,5 +40,13 @@
     <string name="update_user_avatar">更新头像</string>
     <string name="update_user_avatar_fail">更新头像失败</string>
     <string name="update_user_avatar_success">更新头像成功</string>
+    <string name="collect_title">收藏中心</string>
+    <!--我的工具-->
+    <string name="my_collects">我的收藏</string>
+    <string name="my_shop_of_collects">店铺关注</string>
+    <string name="my_footmark">足迹</string>
+    <string name="my_live_coupon">生活券</string>
+    <string name="my_online_store_coupon">网店劵</string>
+    <string name="my_vip_card">会员卡</string>
 
 </resources>

@@ -329,7 +329,7 @@ public interface I {
 
     /** 上传头像图片的类型：user_avatar或group_icon */
     String AVATAR_TYPE = "avatarType";
-    String AVARAR_SUFFIX = "m_avatar_suffix";
+    String AVATAR_SUFFIX = "m_avatar_suffix";
     /** 用户的账号或群组的环信id */
     String NAME_OR_HXID = "name_or_hxid";
     /** 客户端发送的获取服务端状态的请求 */

@@ -379,10 +379,12 @@ public class ImageLoader {
                 .showImage(context);
     }
 
+    //http://101.251.196.90:8000/FuLiCenterServerV2.0/downloadAvatar?
+    // name_or_hxid=a952700&avatarType=0&m_avatar_suffix=.jpg&width=200&height=200
     public static String getAvatarUrl(UserAvatar user) {
         if (user != null) {
             String url = I.DOWNLOAD_AVATAR_URL + I.NAME_OR_HXID + "=" + user.getMuserName()
-                    + I.AND + I.AVATAR_TYPE + "=" + user.getMavatarPath() + I.AND + I.AVARAR_SUFFIX
+                    + I.AND + I.AVATAR_TYPE + "=" + user.getMavatarPath() + I.AND + I.AVATAR_SUFFIX
                     + "=" + user.getMavatarSuffix() + I.AND + "width=200&height=200" + "&" + user.getMavatarLastUpdateTime();
             L.e("useravatar=" + url);
             return url;
