@@ -29,6 +29,7 @@ import zhou.com.fulicenter.bean.UserAvatar;
 import zhou.com.fulicenter.dao.UserDao;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
+import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.ImageLoader;
 import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
@@ -106,7 +107,13 @@ public class PersonalCenterFragment extends BaseFragment implements AdapterView.
             L.e(TAG, "position=" + position);
             MFGT.gotoCollectsActivity(mContext);
         }*/
-        MFGT.gotoCollectsActivity(mContext);
+        if (user == null) {
+            //finish();
+            CommonUtils.showLongToast(R.string.login_first);
+            MFGT.gotoLoginActivity(mContext);
+        }else {
+            MFGT.gotoCollectsActivity(mContext);
+        }
     }
 
 

@@ -63,6 +63,7 @@
         <string name="my_online_store_coupon">online store coupon</string>
         <string name="my_vip_card">VIP Card</string>
     <string name="delete_collect_fail">delete collect fail</string>
+    <string name="login_first">You have not login, please login</string>
 
 
 </resources>

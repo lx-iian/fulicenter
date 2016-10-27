@@ -22,6 +22,7 @@ import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.ConvertUtils;
 import zhou.com.fulicenter.utils.L;
+import zhou.com.fulicenter.utils.MFGT;
 import zhou.com.fulicenter.views.DisplayUtils;
 import zhou.com.fulicenter.views.SpaceItemDecoration;
 
@@ -118,9 +119,9 @@ public class CollectsActivity extends BaseActivity {
                 if (result != null && result.length > 0) {
                     ArrayList<CollectBean> list = ConvertUtils.array2List(result);
                     if (action == I.ACTION_DOWNLOAD || action == I.ACTION_PULL_DOWN) {
-                    //    mAdapter.initData(list);
+                        //    mAdapter.initData(list);
                     } else {
-                     //   mAdapter.addData(list);
+                        //   mAdapter.addData(list);
                     }
                     if (list.size() < I.PAGE_SIZE_DEFAULT) {
                         mAdapter.setMore(false);
@@ -143,11 +144,8 @@ public class CollectsActivity extends BaseActivity {
 
     @Override
     protected void initData() {
-         user = FuLiCenterApplication.getUser();
-        if (user == null) {
-            finish();
-        }
-       downloadCollects(I.ACTION_DOWNLOAD);
+        user = FuLiCenterApplication.getUser();
+        downloadCollects(I.ACTION_DOWNLOAD);
     }
 
     @Override

@@ -7,6 +7,7 @@ import java.io.File;
 
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.bean.BoutiqueBean;
+import zhou.com.fulicenter.bean.CartBean;
 import zhou.com.fulicenter.bean.CategoryChildBean;
 import zhou.com.fulicenter.bean.CategoryGroupBean;
 import zhou.com.fulicenter.bean.CollectBean;
@@ -146,7 +147,7 @@ public class NetDao {
                 .execute(listener);
     }
 
-    public static void isColected(Context context, String username, int goodsId, OkHttpUtils.OnCompleteListener<MessageBean> listener) {
+    public static void isCollected(Context context, String username, int goodsId, OkHttpUtils.OnCompleteListener<MessageBean> listener) {
         OkHttpUtils<MessageBean> utils = new OkHttpUtils<>(context);
         utils.setRequestUrl(I.REQUEST_IS_COLLECT)
                 .addParam(I.Collect.USER_NAME, username)
@@ -163,4 +164,12 @@ public class NetDao {
                 .targetClass(MessageBean.class)
                 .execute(listener);
     }
+    public static void downloadCart(Context context, String username, OkHttpUtils.OnCompleteListener<CartBean[]> listener) {
+        OkHttpUtils<CartBean[]> utils = new OkHttpUtils<>(context);
+        utils.setRequestUrl(I.REQUEST_FIND_CARTS)
+                .addParam(I.Cart.USER_NAME, username)
+                .targetClass(CartBean[].class)
+                .execute(listener);
+    }
+
 }

@@ -16,6 +16,7 @@ import zhou.com.fulicenter.FuLiCenterApplication;
 import zhou.com.fulicenter.I;
 import zhou.com.fulicenter.R;
 import zhou.com.fulicenter.fragment.BoutiqueFragment;
+import zhou.com.fulicenter.fragment.CartFragment;
 import zhou.com.fulicenter.fragment.CategoryFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 import zhou.com.fulicenter.fragment.PersonalCenterFragment;
@@ -55,6 +56,7 @@ public class MainActivity extends BaseActivity {
     BoutiqueFragment mBoutiqueFragment;
     CategoryFragment mCategoryFragment;
     PersonalCenterFragment mPersonalCenterFragment;
+    CartFragment mCartFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,9 +72,11 @@ public class MainActivity extends BaseActivity {
         mBoutiqueFragment = new BoutiqueFragment();
         mCategoryFragment = new CategoryFragment();
         mPersonalCenterFragment = new PersonalCenterFragment();
+        mCartFragment = new CartFragment();
         mFragments[0] = mNewGoodsFragment;
         mFragments[1] = mCategoryFragment;
         mFragments[2] = mBoutiqueFragment;
+        mFragments[3] = mCartFragment;
         mFragments[4] = mPersonalCenterFragment;
         getSupportFragmentManager()
                 .beginTransaction()
@@ -129,21 +133,25 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rb_cart:
                 //  setOtherRb();
-                index = 3;
+                if (FuLiCenterApplication.getUsername() == null) {
+                    MFGT.gotoLoginActivity(this);
+                } else {
+                    index = 3;
+                }
                 break;
             case R.id.rb_personal_center:
                 //  setCart();
               /*  if (FuLiCenterApplication.getUsername() == null) {
                     MFGT.gotoLoginActivity(this);
                 } else {*/
-                    index = 4;
-               // }
+                index = 4;
+                // }
                 /*MFGT.gotoLoginActivity(this);
                 return;*/
                 break;
         }
         setFragment();
-       // setRadioButtomSatatus();
+        // setRadioButtomSatatus();
     }
 
     private void setFragment() {

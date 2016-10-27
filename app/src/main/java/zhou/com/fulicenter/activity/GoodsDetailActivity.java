@@ -179,7 +179,7 @@ public class GoodsDetailActivity extends BaseActivity {
         UserAvatar user = FuLiCenterApplication.getUser();
         if (user != null) {
 
-            NetDao.isColected(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+            NetDao.isCollected(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
                 @Override
                 public void onSuccess(MessageBean result) {
                     if (result != null && result.isSuccess()) {
@@ -196,6 +196,8 @@ public class GoodsDetailActivity extends BaseActivity {
                     updateGoodsCollectStatus();
                 }
             });
+        }else if (user == null) {
+
         }
         updateGoodsCollectStatus();
     }
