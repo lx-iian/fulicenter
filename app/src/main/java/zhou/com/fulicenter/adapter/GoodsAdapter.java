@@ -146,18 +146,18 @@ public class GoodsAdapter extends RecyclerView.Adapter {
                         result = (int) (Long.valueOf(right.getAddTime()) - Long.valueOf(left.getAddTime()));
                         break;
                     case I.SORT_BY_PRICE_ASC:
-                        result = getPrice(left.getCurrencyPrice()) - getPrice(right.getCurrencyPrice());
+                        result = (int) (getPrice(left.getCurrencyPrice()) - getPrice(right.getCurrencyPrice()));
                         break;
                     case I.SORT_BY_PRICE_DESC:
-                        result = getPrice(right.getCurrencyPrice()) - getPrice(left.getCurrencyPrice());
+                        result = (int) (getPrice(right.getCurrencyPrice()) - getPrice(left.getCurrencyPrice()));
                         break;
                 }
                 return result;
             }
 
-            private int getPrice(String price) {
+            private float getPrice(String price) {
                 price = price.substring(price.indexOf("￥") + 1);
-                return Integer.valueOf(price);
+                return Float.valueOf(price);
             }
         });
     }
