@@ -50,10 +50,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         GoodsDetailsBean goods = cartBean.getGoods();
         if (goods != null) {
             ImageLoader.downloadImg(mContext, holder.mIvCartThumb, goods.getGoodsThumb());
-            holder.mTvCartGoodName.setText(goods.getCurrencyPrice());
+            holder.mTvCartGoodName.setText(goods.getGoodsName());
+            holder.mTvCartPrice.setText(goods.getCurrencyPrice());
         }
-        holder.mTvCartCount.setText(cartBean.getCount());
-        holder.mCbCartSelect.setChecked(false);
+        holder.mTvCartCount.setText(String.valueOf(cartBean.getCount()));
+        holder.mCbCartSelect.setChecked(cartBean.isChecked());
         holder.mCbCartSelect.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -124,7 +125,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
             final int position = (int) mIvCartAdd.getTag();
             CartBean cart = mList.get(position);
             if (cart.getCount() > 1) {
-                NetDao.updateCart(mContext, cart.getId(), cart.getCount() + 1, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                NetDao.updateCart(mContext, cart.getId(), cart.getCount() - 1, new OkHttpUtils.OnCompleteListener<MessageBean>() {
                     @Override
                     public void onSuccess(MessageBean result) {
                         if (result != null && result.isSuccess()) {
@@ -141,7 +142,21 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     }
                 });
             } else {
+                NetDao.deleteCart(mContext, cart.getId(), new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                    @Override
+                    public void onSuccess(MessageBean result) {
+                        if (result != null && result.isSuccess()) {
+                            mList.remove(position);
+                            mContext.sendBroadcast(new Intent(I.BROADCAST_UPDATE_CART));
+                            notifyDataSetChanged();
+                        }
+                    }
 
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
             }
         }
     }

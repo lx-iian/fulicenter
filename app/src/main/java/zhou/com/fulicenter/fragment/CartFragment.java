@@ -48,10 +48,12 @@ public class CartFragment extends BaseFragment {
     RecyclerView mRv;
     @BindView(R.id.srl)
     SwipeRefreshLayout mSrl;
+
     LinearLayoutManager llm;
     MainActivity mContent;
     CartAdapter mAdapter;
     ArrayList<CartBean> mList;
+
     @BindView(R.id.tv_nothing)
     TextView mTvNothing;
     @BindView(R.id.tv_cart_sum_price)
@@ -107,8 +109,8 @@ public class CartFragment extends BaseFragment {
         } else {
             NetDao.downloadCart(mContent, user.getMuserName(), new OkHttpUtils.OnCompleteListener<String>() {
                 @Override
-                public void onSuccess(String string) {
-                    ArrayList<CartBean> list = ResultUtils.getCartFromJson(string);
+                public void onSuccess(String s) {
+                    ArrayList<CartBean> list = ResultUtils.getCartFromJson(s);
                     L.e(TAG, "result=" + list);
                     mSrl.setRefreshing(false);
                     mTvRefresh.setVisibility(View.GONE);
@@ -132,7 +134,6 @@ public class CartFragment extends BaseFragment {
                     L.e("error" + error);
                 }
             });
-
         }
     }
 
@@ -171,11 +172,12 @@ public class CartFragment extends BaseFragment {
                     ranPrice += getPrice(c.getGoods().getRankPrice()) * c.getCount();
                 }
             }
-            mTvCartSumPrice.setText("合计：￥ " + ranPrice);
-            mTvCartSavePrice.setText("节省：￥ " + (sumPrice - ranPrice));
+            mTvCartSumPrice.setText("合计：￥ " + Float.valueOf(ranPrice));
+            mTvCartSavePrice.setText("节省：￥ " + Float.valueOf(sumPrice - ranPrice));
         } else {
-            mTvCartSavePrice.setText("合计：￥ 88.88");
-            mTvCartSavePrice.setText("节省：￥ 6.66");
+            setCartLayout(false);
+            mTvCartSavePrice.setText("合计：￥ 0.00");
+            mTvCartSavePrice.setText("节省：￥ 0.00 ");
         }
     }
 
@@ -184,20 +186,21 @@ public class CartFragment extends BaseFragment {
         return Float.valueOf(price);
     }
 
-    class updateCartReceiver  extends BroadcastReceiver {
+    class updateCartReceiver extends BroadcastReceiver {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            L.e(TAG,"updateCartReceiver..");
+            L.e(TAG, "updateCartReceiver..");
             sumPrice();
+            setCartLayout(mList != null && mList.size() > 0);
         }
-   }
+    }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if (mReceiver != null) {
-            mContent.unregisterReceiver(mReceiver);
-        }
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            if (mReceiver != null) {
+                mContent.unregisterReceiver(mReceiver);
+            }
     }
 }
