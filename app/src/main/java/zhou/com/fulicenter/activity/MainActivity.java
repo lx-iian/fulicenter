@@ -20,6 +20,7 @@ import zhou.com.fulicenter.fragment.CartFragment;
 import zhou.com.fulicenter.fragment.CategoryFragment;
 import zhou.com.fulicenter.fragment.NewGoodsFragment;
 import zhou.com.fulicenter.fragment.PersonalCenterFragment;
+import zhou.com.fulicenter.utils.CommonUtils;
 import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.MFGT;
 
@@ -133,8 +134,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.rb_cart:
                 //  setOtherRb();
-                if (FuLiCenterApplication.getUsername() == null) {
-                    MFGT.gotoLoginActivity(this);
+                if (FuLiCenterApplication.getUser()== null) {
+                    CommonUtils.showLongToast(R.string.login_first);
+                    MFGT.gotoLoginActivityFromCart(this);
                 } else {
                     index = 3;
                 }
@@ -179,15 +181,21 @@ public class MainActivity extends BaseActivity {
         setFragment();
     }
 
-/*    @Override
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         L.e(TAG, "onActivityResult, requestCode=" + requestCode);
-        if (requestCode == I.REQUEST_CODE_LOGIN && FuLiCenterApplication.getUser() != null) {
-            index = 4;
-            L.e(TAG,"user-" + data);
+        if (FuLiCenterApplication.getUser() != null) {
+            /* if (requestCode == I.REQUEST_CODE_LOGIN) {
+                index = 4;
+                 L.e(TAG,"user-" + data);
+            }*/
+            if (requestCode == I.REQUEST_CODE_FROM_CART) {
+                index = 3;
+                L.e(TAG, "user-" + data);
+            }
         }
-    }*/
+    }
 
     /*  private void setOtherRb() {
         if (!isCart) {
