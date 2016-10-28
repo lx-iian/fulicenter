@@ -64,6 +64,7 @@ public class CartFragment extends BaseFragment {
     RelativeLayout mLayoutCart;
 
     updateCartReceiver mReceiver;
+    String cartIds = null;
 
     @Nullable
     @Override
@@ -152,7 +153,12 @@ public class CartFragment extends BaseFragment {
     }
 
     @OnClick(R.id.tv_cart_buy)
-    public void onClick() {
+    public void buy() {
+        if (cartIds != null && cartIds.equals("") && cartIds.length() > 0) {
+            MFGT.gotoBay(mContent, cartIds);
+        } else {
+            CommonUtils.showLongToast(R.string.order_nothing);
+        }
     }
 
     public void setCartLayout(boolean hasCart) {
@@ -163,11 +169,13 @@ public class CartFragment extends BaseFragment {
     }
 
     private void sumPrice() {
+        cartIds = null;
         float sumPrice = 0.0f;
         float ranPrice = 0.0f;
         if (mList != null && mList.size() > 0) {
             for (CartBean c : mList) {
                 if (c.isChecked()) {
+                    cartIds += c.getId() + ",";
                     sumPrice += getPrice(c.getGoods().getCurrencyPrice()) * c.getCount();
                     ranPrice += getPrice(c.getGoods().getRankPrice()) * c.getCount();
                 }
@@ -203,10 +211,10 @@ public class CartFragment extends BaseFragment {
     }
 
     @Override
-        public void onDestroy() {
-            super.onDestroy();
-            if (mReceiver != null) {
-                mContent.unregisterReceiver(mReceiver);
-            }
+    public void onDestroy() {
+        super.onDestroy();
+        if (mReceiver != null) {
+            mContent.unregisterReceiver(mReceiver);
+        }
     }
 }

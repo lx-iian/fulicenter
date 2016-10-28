@@ -15,6 +15,7 @@ import zhou.com.fulicenter.activity.CollectsActivity;
 import zhou.com.fulicenter.activity.GoodsDetailActivity;
 import zhou.com.fulicenter.activity.LoginActivity;
 import zhou.com.fulicenter.activity.MainActivity;
+import zhou.com.fulicenter.activity.OrderActivity;
 import zhou.com.fulicenter.activity.RegisterActivity;
 import zhou.com.fulicenter.activity.UpdateNickActivity;
 import zhou.com.fulicenter.bean.BoutiqueBean;
@@ -99,5 +100,11 @@ public class MFGT {
 
     public static void gotoCollectsActivity(Activity context) {
         startActivity(context, CollectsActivity.class);
+    }
+
+    public static void gotoBay(Activity context, String cartId) {
+        Intent intent = new Intent(context, OrderActivity.class).putExtra(I.Cart.ID, cartId);
+        startActivity(context, intent);
+
     }
 }
