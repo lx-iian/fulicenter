@@ -1,5 +1,6 @@
 package zhou.com.fulicenter.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.EditText;
@@ -7,7 +8,16 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.pingplusplus.android.PingppLog;
+import com.pingplusplus.libone.PaymentHandler;
+import com.pingplusplus.libone.PingppOne;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,7 +33,8 @@ import zhou.com.fulicenter.utils.L;
 import zhou.com.fulicenter.utils.ResultUtils;
 import zhou.com.fulicenter.views.DisplayUtils;
 
-public class OrderActivity extends BaseActivity {
+public class OrderActivity extends BaseActivity implements PaymentHandler {
+    private static String URL = "http://218.244.151.190/demo/charge";
 
     private static final String TAG = OrderActivity.class.getSimpleName();
 
@@ -53,6 +64,14 @@ public class OrderActivity extends BaseActivity {
         mContext = this;
         mList = new ArrayList<>();
         super.onCreate(savedInstanceState);
+        //设置需要使用的支付方式
+        PingppOne.enableChannels(new String[]{"wx", "alipay", "upacp", "bfb", "jdpay_wap"});
+
+        // 提交数据的格式，默认格式为json
+        // PingppOne.CONTENT_TYPE = "application/x-www-form-urlencoded";
+        PingppOne.CONTENT_TYPE = "application/json";
+
+        PingppLog.DEBUG = true;
     }
 
     @Override
@@ -153,6 +172,45 @@ public class OrderActivity extends BaseActivity {
 
     private void gotoStatement() {
         L.e(TAG, "rankPrice" + ranPrice);
+
+        // 产生个订单号
+        String orderNo = new SimpleDateFormat("yyyyMMddhhmmss")
+                .format(new Date());
+
+        // 构建账单json对象
+        JSONObject bill = new JSONObject();
+
+        // 自定义的额外信息 选填
+        JSONObject extras = new JSONObject();
+        try {
+            extras.put("extra1", "extra1");
+            extras.put("extra2", "extra2");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            bill.put("order_no", orderNo);
+            bill.put("ranPrice", ranPrice);
+            bill.put("extras", extras);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        //壹收款: 创建支付通道的对话框
+        PingppOne.showPaymentChannels(getSupportFragmentManager(), bill.toString(), URL, this);
     }
 
+    @Override
+    public void handlePaymentResult(Intent data) {
+        if (data != null) {
+            /**
+             * code：支付结果码  -2:服务端错误、 -1：失败、 0：取消、1：成功
+             * error_msg：支付结果信息
+             */
+
+            int code = data.getExtras().getInt("code");
+            String errorMsg = data.getExtras().getString("error_msg");
+        }
+    }
 }
