@@ -64,7 +64,7 @@ public class CartFragment extends BaseFragment {
     RelativeLayout mLayoutCart;
 
     updateCartReceiver mReceiver;
-    String cartIds = null;
+    String cartIds = "";
 
     @Nullable
     @Override
@@ -154,8 +154,9 @@ public class CartFragment extends BaseFragment {
 
     @OnClick(R.id.tv_cart_buy)
     public void buy() {
-        if (cartIds != null && cartIds.equals("") && cartIds.length() > 0) {
-            MFGT.gotoBay(mContent, cartIds);
+        L.e(TAG,"get cartIds=" + cartIds);
+        if (cartIds != null && !cartIds.equals("") && cartIds.length() > 0) {
+            MFGT.gotoBuy(mContent, cartIds);
         } else {
             CommonUtils.showLongToast(R.string.order_nothing);
         }
@@ -169,13 +170,14 @@ public class CartFragment extends BaseFragment {
     }
 
     private void sumPrice() {
-        cartIds = null;
+        cartIds = "";
         float sumPrice = 0.0f;
         float ranPrice = 0.0f;
         if (mList != null && mList.size() > 0) {
             for (CartBean c : mList) {
                 if (c.isChecked()) {
                     cartIds += c.getId() + ",";
+                    L.e(TAG,"cartIds ="+ cartIds);
                     sumPrice += getPrice(c.getGoods().getCurrencyPrice()) * c.getCount();
                     ranPrice += getPrice(c.getGoods().getRankPrice()) * c.getCount();
                 }

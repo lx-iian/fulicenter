@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -78,8 +78,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
     }
 
     class CartViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.tv_common_title)
-        TextView mTvCommonTitle;
         @BindView(R.id.cb_cart_selected)
         CheckBox mCbCartSelect;
         @BindView(R.id.iv_cart_thumb)
@@ -95,7 +93,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         @BindView(R.id.iv_cart_add)
         ImageView mIvCartAdd;
         @BindView(R.id.layout_cart_detail)
-        LinearLayout mLayoutCartDetail;
+        RelativeLayout mLayoutCartDetail;
 
         CartViewHolder(View view) {
             super(view);

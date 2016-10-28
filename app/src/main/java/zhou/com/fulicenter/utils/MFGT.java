@@ -102,7 +102,7 @@ public class MFGT {
         startActivity(context, CollectsActivity.class);
     }
 
-    public static void gotoBay(Activity context, String cartId) {
+    public static void gotoBuy(Activity context, String cartId) {
         Intent intent = new Intent(context, OrderActivity.class).putExtra(I.Cart.ID, cartId);
         startActivity(context, intent);
 
