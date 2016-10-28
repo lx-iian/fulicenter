@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_cart_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical">
 
-
     <RelativeLayout
+        android:id="@+id/layout_cart_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -22,10 +23,14 @@
 
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/btn_gray_pressed_status" />
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp">
+        android:layout_height="120dp">
 
         <CheckBox
             android:id="@+id/cb_cart_selected"

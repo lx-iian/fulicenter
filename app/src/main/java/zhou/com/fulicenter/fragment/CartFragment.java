@@ -175,7 +175,6 @@ public class CartFragment extends BaseFragment {
             mTvCartSumPrice.setText("合计：￥ " + Float.valueOf(ranPrice));
             mTvCartSavePrice.setText("节省：￥ " + Float.valueOf(sumPrice - ranPrice));
         } else {
-            setCartLayout(false);
             mTvCartSavePrice.setText("合计：￥ 0.00");
             mTvCartSavePrice.setText("节省：￥ 0.00 ");
         }

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import zhou.com.fulicenter.bean.MessageBean;
 import zhou.com.fulicenter.net.NetDao;
 import zhou.com.fulicenter.net.OkHttpUtils;
 import zhou.com.fulicenter.utils.ImageLoader;
+import zhou.com.fulicenter.utils.MFGT;
 
 /**
  * Created by Administrator on 2016/10/19.
@@ -92,10 +94,19 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
         TextView mTvCartCount;
         @BindView(R.id.iv_cart_add)
         ImageView mIvCartAdd;
+        @BindView(R.id.layout_cart_detail)
+        LinearLayout mLayoutCartDetail;
 
         CartViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+        }
+
+        @OnClick({R.id.iv_cart_thumb, R.id.tv_cart_good_name, R.id.tv_cart_price})
+        public void gotoDetail() {
+            final int position = (int) mIvCartAdd.getTag();
+            CartBean cart = mList.get(position);
+            MFGT.gotoGoodsDetailsActivity(mContext, cart.getGoodsId());
         }
 
         @OnClick(R.id.iv_cart_add)
