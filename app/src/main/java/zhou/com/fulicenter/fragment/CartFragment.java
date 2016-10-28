@@ -195,7 +195,14 @@ public class CartFragment extends BaseFragment {
         }
     }
 
-        @Override
+    @Override
+    public void onResume() {
+        super.onResume();
+        L.e(TAG, "onResume......");
+        initData();
+    }
+
+    @Override
         public void onDestroy() {
             super.onDestroy();
             if (mReceiver != null) {

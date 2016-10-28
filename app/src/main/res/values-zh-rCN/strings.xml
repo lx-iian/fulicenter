@@ -50,5 +50,7 @@
     <string name="my_vip_card">会员卡</string>
     <string name="delete_collect_fail">删除收藏失败</string>
     <string name="login_first">您还未登陆，请先登录</string>
+    <string name="add_goods_success">添加购物车成功</string>
+    <string name="add_goods_fail">添加购物车失败</string>
 
 </resources>

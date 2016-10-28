@@ -27,6 +27,7 @@ import zhou.com.fulicenter.views.SlideAutoLoopView;
 import zhou.sharesdk.onekeyshare.OnekeyShare;
 
 public class GoodsDetailActivity extends BaseActivity {
+    private static final String TAG = GoodsDetailActivity.class.getSimpleName();
 
     @BindView(R.id.backClickArea)
     LinearLayout mBackClickArea;
@@ -136,7 +137,7 @@ public class GoodsDetailActivity extends BaseActivity {
     }
 
     @OnClick(R.id.iv_good_collect)
-    public void oncollectClick() {
+    public void onCollectClick() {
         UserAvatar user = FuLiCenterApplication.getUser();
         if (user == null) {
 
@@ -196,7 +197,7 @@ public class GoodsDetailActivity extends BaseActivity {
                     updateGoodsCollectStatus();
                 }
             });
-        }else if (user == null) {
+        } else if (user == null) {
 
         }
         updateGoodsCollectStatus();
@@ -240,5 +241,30 @@ public class GoodsDetailActivity extends BaseActivity {
 
         // 启动分享GUI
         oks.show(this);
+    }
+
+    @OnClick(R.id.iv_good_cart)
+    public void addCart() {
+        UserAvatar user = FuLiCenterApplication.getUser();
+        if (user != null) {
+            NetDao.addCart(mContext, user.getMuserName(), goodsId, new OkHttpUtils.OnCompleteListener<MessageBean>() {
+                @Override
+                public void onSuccess(MessageBean result) {
+                    if (result != null && result.isSuccess()) {
+                        CommonUtils.showLongToast(R.string.add_goods_success);
+                    } else {
+                        CommonUtils.showLongToast(R.string.add_goods_fail);
+                    }
+                }
+
+                @Override
+                public void onError(String error) {
+                    CommonUtils.showLongToast(R.string.add_goods_fail);
+                    L.e(TAG, "add good error = " + error);
+                }
+            });
+        } else {
+            MFGT.gotoLoginActivity(mContext);
+        }
     }
 }
