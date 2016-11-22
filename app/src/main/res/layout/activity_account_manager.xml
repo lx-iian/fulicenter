@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bottom_bar_normal_bg_top"
     android:orientation="vertical"
-    tools:context="zhou.com.fulicenter.activity.AccountManagerActivity">
+    tools:context=".controller.activity.AccountManagerActivity">
 
     <include layout="@layout/common_head_title" />
 

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/list_background"
     android:orientation="vertical"
-    tools:context="zhou.com.fulicenter.activity.OrderActivity">
+    tools:context=".controller.activity.OrderActivity">
 
     <include layout="@layout/common_head_title" />
 
